@@ -1,0 +1,4189 @@
+1.1
+int main()
+{
+    return 0;
+}
+
+1.2
+#include <iostream>
+int main()
+{
+    std::cout<<"Enter two numbers:"<<std::endl;
+    int v1=0, v2=0;
+    std::cin>>v1>>v2;
+    std::cout<<"The sum of"<<v1<<"and"<<v2<<"is"<<v1+v2<<std:endl;
+    return 0;
+}
+
+int v1=0,v2=0;
+std::cin>>v1>>v2;
+std::cout<<"The sum of"<<v1<<"and"<<v2<<"is"<<v1+v2<<std::endl;
+
+1.3
+#include <iostream>
+int main()
+{
+	return 0;
+}
+
+1.4.1
+#include <iostream>
+int main()
+{
+	int sum=0,val=1;
+	while(val<=10){
+		sum+=val;
+		++val;	
+	}
+	std::cout<<"Sum of 1 to 10 inclusive is "<<sum<<std::endl;
+	return 0;
+}
+
+1.4.2
+#include <iostream>
+int main()
+{
+	int sum=0;
+	for(int val=1;val<=10;++val)
+		sum+=val;
+	std::cout<<"Sum of 1 to 10 inclusive is "
+		 <<sum<<std::endl;
+	return 0;
+}
+
+1.4.3
+#include <iostream>
+int main()
+{
+	int sum=0,value=0;
+	while(std::cin>>value)
+		sum+=value;
+	std::cout<<"Sum is: "<<sum<<std::endl
+	return 0;
+}
+
+1.4.4
+#include <iostream>
+int main()
+{
+	//currVal是我们正在统计的数；我们将读入的新值存入val
+	int currVal=0,val=0;
+	if(std::cin>>currVal){
+		int cnt=1;
+		while(std::cin>>val){
+			if(val=currVal)
+				++cnt;
+			else{
+				std::cout<<currVal<<"occurs"<<cnt<<"times"<<std::endl;
+				currVal=val;
+				cnt=1;
+			}
+		}
+		std::cout<<currVal<<"occurs"<<cnt<<"times"<<std::endl;
+	}
+	return 0;
+}
+
+1.5.1
+#include <iostream>
+#include "Sales_item.h"
+int main()
+{
+	Sales_item book;
+	//读入ISBN号，售出的册书以及销售价格
+	std::cin>>book;
+	//写入ISBN，售出的册数，总销售额和平均价格
+	std::cout<<book<<std::endl;
+	return 0;
+}
+
+#include <iostream>
+#include "Sales_item.h"
+int main()
+{
+	Sales_item item1,item2;
+	std::cin>>item1>>item2;	//读取一对交易记录
+	std::cout<<item1+item2<<std::endl;
+	return 0;
+}
+
+1.5.2
+#include <iostream>
+#include "Sales_item.h"
+int main()
+{
+	Sales_item item1,item2;
+	std::cin>>item1>>item2;
+	if(item1.isbn()==item2.isbn()){
+		std::cout<<item1+item2<<std::endl;
+		return 0;
+	}else{
+		std::cerr<<"Data must refer to same ISBN"<<std::endl;
+		return -1;
+	}
+}
+
+1.6
+#include <iostream>
+#include "Sales_item.h"
+int main()
+{
+	Sales_item total; //保存下一条交易记录的变量
+	//读入第一条交易记录，并确保有数据可以处理
+	if(std::cin>>total){
+		Sales_item trans; //保存和的变量
+		while(std::cin>>trans){
+			if(total.isbn()==trans.isbn())
+				total+=trans;
+			else{
+				//打印前一本书的结果
+				std::cout<<total<<std::endl;
+				total=trans;//total现在表示下一本书的销售额
+			}				
+		}
+		std::cout<<total<<std::endl;//打印最后一本书的结果
+	}else{
+		//没有输入！警告读者
+		std::cerr<<"No data?!"<<std::endl;
+		return -1;
+	}
+	return 0;
+}
+
+2.2.1
+int sum=0,value,units_sold=0;
+Sales_item item;
+std::string book("0-201-78345-X");
+
+int units_sold=0;
+int units_sold={0};
+int units_sold(0);
+int units_sold{0};
+
+2.2.2
+extern int i;//声明i而非定义i
+int j;//定义j
+
+extern double pi=3.1416;//定义，只要是初始化之后就不是声明了
+
+
+2.2.3
+int somename,someName,SomeName,SOMENAME;
+
+用户定义的标识符不能连续出现两个下划线，不能下划线紧连大写字母开头，定义在函数体外的标识符不能以下划线开头
+
+2.2.4
+using namespace std;
+int reused=42;
+int main()
+{
+	int unique=0;
+	std::cout<<reused<<" "<<unique<<std::endl;
+	//输出42 0
+	int reused=0;
+	std::cout<<reused<<" "<<unique<<std::endl;
+	//输出0 0
+	std::cout<<::reused<<" "<<unique<<std::endl;
+	return 0;
+}
+2.3.1
+int ival=1024;
+int &refVal=ival; //refVal指向ival(是ival的另一个名字)
+//引用必须被初始化
+//引用把引用和初始值绑定在一起，而不是将初始值拷贝给引用
+//引用即别名
+refVal=2;//把2赋给refVal指定的对象，赋给了ival
+int ii=refVal;//与ii=ival执行结果一样
+//引用本身不是一个对象，所以不能定义引用的引用
+
+int i=1024,i2=2048;
+int &r=i,r2=i2;
+int i3=1024;&ri=i3;
+int &r3=i3,&r4=i2;
+
+2.3.2
+int *ip1,*ip2;
+double dp,*dp2;
+
+int ival=42;
+int *p=&ival;
+
+double dval;
+double *pd=&dval;//初始值是double型对象的地址
+double *pd2=pd;//初始值是指向double对象的指针
+
+int ival=42;
+int *p=&ival;
+cout<<*p;
+//输出42
+
+*p=0;
+cout<<*p;
+//输出为0
+
+！解引用操作仅适用于那些确实指向了某个对象的有效指针
+
+！生成空指针的方法
+int *p1=nullptr;//等价于int *p1=0;
+int *p2=0;	//直接将p2初始化为字面常量0
+//需要首先#include cstdlib
+int *p3=NULL;   //等价于int *p3=0;
+
+！把int变量直接赋值给指针是错误的操作，即使int变量的值恰好等于0也不行
+！建议初始化所有的指针
+
+int i=42;
+int *pi=0; //pi被初始化，但没有指向任何对象
+int *pi2=&i; //pi2被初始化，存有i的地址
+int *pi3; //如果pi3定义于块内，则pi3的值是无法确定的
+pi3=pi2; //pi3和pi2指向同一个对象i
+pi2=0;  //现在pi2不指向任何对象了
+
+pi=&ival; //pi的值被改变，现在pi指向了ival
+*pi=0;	  //ival的值被改变，指针pi并没有改变
+
+！任何非0指针对应的条件值都是true
+int ival=1024;	
+int *pi=0;	//pi合法，是一个空指针
+int *pi2=&ival; //pi2是一个合法的指针，存放着ival的地址
+if(pi)	//pi的值是0,因此条件的值是false
+	//...
+if(pi2) //pi2指向ival，因此它的值不是0，条件的值是true
+	//...
+
+!void*指针可以存放任意对象的地址，我们对该地址中到底是什么类型的对象并不了解
+double obj=3.14,*pd=&obj;//正确:void*能存放任意类型对象的地址
+void *pv=&obj;		//obj可以是任意类型的对象
+pv=pd; 			//pv可以存放任意类型的指针
+！不能直接操作void*指针所指的对象，因为我们不知道对象是什么类型
+
+练习2.18
+#include<iostream>
+int main()
+{
+	int a=0,b=1;
+	int *p1=&a,*p2=p1;
+	p1=&b;//改变了指针的值
+	*p1=b;//改变了指针所指对象的值
+}
+
+练习2.19
+指针和引用的区别
+1.指针本身就是一个对象，允许指针之间的拷贝和赋值，也可以在其生命周期指向不同的对象。而引用不行
+2.指针无需再定义时赋值
+
+练习2.23
+如何判断一个指针指向了合法的对象
+答：不能判断，不知道指针是否有效
+
+2.3.3
+!指向指针的指针
+int ival=1024;
+int *pi=&ival;	//pi指向一个int型的数
+int **ppi=&pi;	//ppi指向一个int型的指针
+cout<<"The value of ival\n"
+    <<"direct value: "<<ival<<"\n"
+    <<"indirect value: "<<*pi<<"\n"
+    <<"doubly indirect value: "<<**ppi
+    <<endl;
+
+!指向指针的引用
+int i=42;
+int *p;	//p是一个int型指针
+int *&r=p; //r是一个对指针p的引用
+r=&i;	//r引用了一个指针，因此给r赋值&i就是令p指向i
+*r=0;	//解引用r得到i，也就是p指向的对象，将i的值改为0
+！确定r的类型到底是什么，最简单的办法是从右向左阅读r的定义，离变量名最近的符号对变量的类型有最直接的影响，因此r是一个引用，
+声明符的其余部分用意确定r引用的类型是什么
+
+2.4
+const int bufSize=512; //输入缓冲区的大小
+bufSize=512;//错误:试图向const对象写值
+！const对象必须初始化，一旦创建后其值就不能改变,初始值可以是任意复杂的表达式
+const int i==get_size();//正确：运行时初始化
+const int j=42;//正确：编译时初始化
+const int k;//错误：k是一个未经初始化的常量
+
+int i=42;
+const int ci=i;//正确：i的值被拷贝给了ci
+int j=ci;//正确：ci的值被拷贝给了j
+
+！默认情况下 const对象仅在文件内有效
+//file_1.cc定义并初始化了一个常量，该常量能被其他文件访问
+extern const int bufSize=fcn();
+//file_1.h头文件
+extern const int bufSize;//与file_cc中定义的bufSize是同一个
+！只在一个文件中定义const,而在其他多个文件中声明并使用它，对于const变量不管是声明还是定义都添加extern关键词，这样只需要定义一次就可以了。
+！file_1.cc定义并初始化了bufSize，因为这条语句包含了初始值，所以它是一次定义，bufSize是一个常量，必须用extern加以限定使其被其他文件使用。
+file_1.h头文件中的声明也由extern做了限定，其作用是指明bufSize并非本文件独有，它的定义将在别处出现。
+！如果想在多个文件之间共享const对象，必须在变量的定义之前添加extern关键字
+
+2.4.1
+const int ci=1024;
+const int &r1=ci;//正确：引用及其对应的对象都是常量
+r1=42;//错误：r1是对常量的引用
+int &r2=ci;//错误：试图让一个非常量引用指向一个常量对象
+
+!引用类型必须与其所以引用的对象类型一致，有两个例外，1.初始化常量引用时允许用任意表达式使作为初始值，只要表达式的结果能转换成引用的类型
+即可，尤其允许为一个常量引用绑定非常量的对象，字面值，甚至是个别一般式
+int i=42;
+const int &r1=i;//允许将const int&绑定到一个普通int对象上
+const int &r2=42;//正确：r1是一个常量引用
+const int &r3=r1*2;//正确：r3是一个常量引用
+int &r4=r1*2;//错误：r4是一个普通的非常量引用
+
+double dval=3.14;
+const int &ri=dval;
+//编译器过程
+const int temp=dval;//由双精度浮点数生成一个临时的整型常量
+const int &ri=temp;//让ri绑定这个临时量
+
+int i=42;
+int &r1=i;	 //引用r1绑定对象i
+const int &r2=i; //r2也绑定对象i，但是不允许通过r2修改i的值
+r1=0; //r1并非常量，i的值修改为0
+r2=0; //错误:r2是一个常量引用
+
+2.4.2
+const double pi=3.14;	//pi是个常量，它的值不能改变
+double *ptr=&pi;	//错误：ptr是一个普通指针
+const double *cptr=&pi; //正确：cptr可以指向一个双精度常量
+*cptr=42;		//错误：不能给*cptr赋值
+
+！允许令一个指针常量指向一个非常量对象
+double dval=3.14;//dval是一个双精度浮点数，它的值可以改变 
+cptr=&dval;	 //正确：但是不能通过cptr改变dval的值
+
+int errNumb=0;
+int *const curErr=&errNumb;	//curErr将一直指向errNumb
+const double pi=3.14159;
+const double *const pip=&pi;	//pip是一个指向常量对象的常量指针
+
+*pip=2.72;			//错误：pip是一个指向常量的指针				
+if(*curErr){			//如果curErr所指的对象（也就是errNumb）的值不为0
+	errorHandler();
+	*curErr=0;		//正确：把curErr所指的对象的值重置
+}
+
+！常量指针必须初始化
+
+2.4.3
+顶层const
+！指针类型既可以是顶层const也可以是底层const
+int i=0;
+int *const p1=&i;	//不能改变p1的值，这是一个顶层const
+const int ci=42;	//不能改变ci的值，这是一个顶层const
+const int *p2=&ci；	//允许改变p2的值，这是一个底层const
+const int *const p3=p2; //靠右的const是顶层const，靠左的是底层const
+const int &r=ci;	//用于声明引用的const都是底层const
+
+i=ci;	//正确：拷贝ci的值，ci是一个顶层const，对此操作无影响
+p2=p3;  //正确：p2和p3指向的对象类型相同，p3顶层const的部分不影响
+
+！一般来说非常量可以转换成常量，反之则不行
+int *p=p3;	//错误：p3包含底层const的定义，而p没有
+p2=p3;		//正确：p2和p3都是底层const
+p2=&i;		//正确：int*能转换成const int*
+int &r=ci;	//错误：普通的int&不能绑定到int常量上
+const int &r2=i;//正确：const int&可以绑定到一个普通int上
+
+！顶层const：指的是本身不可被改变
+！底层const：指的是自身所指对象不可以被改变
+
+2.4.4 constexpr和常量表达式
+!一个对象是不是常量表达式由它的数据类型和初始值共同决定
+const int max_files=20;	//max_files是常量表达式
+const int limit=max_files+1;//limit是常量表达式
+int staff_size=27;	//staff_size不是常量表达式
+const int sz=get_size();//sz不是常量表达式
+
+！声明为constexpr的变量一定是个常量
+constexpr int mf=20; //20是常量表达式
+constexpr int limit=mf+1; //mf+1是常量表达式
+constexpr int sz=size();  //只有当size是一个constexpr函数时才是一条正确的声明语句
+！如果你认定变量是一个常量表达式，那就把它声明成constexpr类型
+
+!字面值类型
+一些类型简单，值显而易见，容易得到，算术类型，引用和指针都属于字面值类型
+一个constexpr指针的初始值必须是nullptr或者0，或者是储存于某个固定地址中的对象，
+constexpr指针必须指向固定地址的对象，不能是函数内的变量，除非这个变量有效范围超过
+了函数本身。
+
+！constexpr仅对指针有效，与所指对象无关；
+const int *p=nullptr; //p是一个指向整型常量的指针
+constexpr int *q=nullptr; //q是一个指向整数的常量指针
+p是一个指向常量的指针，q是一个常量指针
+
+constexpr int *np=nullptr;//np是一个指向整数的常量指针，其值为空
+int j=0;
+constexpr int i=42;//i的类型是整数常量
+//i和j都必须定义在函数体之外
+constexpr const int *p=&i;//p是常量指针，指向整型常量i
+constexpr int *p1=&j; //p1是常量指针，指向整数j
+
+2.5 处理类型
+2.5.1类型别名
+typedef double wages;//wages是double的同义词
+typedef wages base,*p;//base是double的同义词，p是double*的同义词
+
+使用别名声明来定义类型的别名
+using SI=Sales_item;//SI是Sales_item的同义词
+
+wages hourly,weekly;//等价于double hourly,weekly;
+SI item;//等价于Sales_item item;
+
+typedef char *pstring;//pstring实际上是类型char*的别名
+const pstring cstr=0;//cstr是指向char的常量指针
+const pstring *ps;//ps是一个指针，它的对象是指向char的常量指针
+!上述基本类型是const pstring，const是对给定类型的修饰，pstring实际上是指向char的指
+针，const pstring是指向char的常量指针,而非指向常量字符的指针。
+
+const char *cstr=0; //是对const pstring cstr的错误理解
+！声明中用到的pstring基本数据类型是指针，用char*重写了声明语句后，数据类型就变成了
+char，*是声明符的一部分，const char成了基本数据类型，前者声明了指向char的常量指针，
+后者声明了一个指向const char的指针。
+
+2.5.3 auto类型说明符
+//由val1和val2相加的结果可以推断出item的类型
+auto item=val1+val2;//item初始化为val1和val2相加的结果
+！一条语句可以声明多个变量，该语句所有变量的初始基本类型必须一样
+auto i=0,*p=&i;		//正确：i是整数，p是整数指针
+auto sz=0,pi=3.14;	//错误：sz和pi类型不一致
+
+复合类型，常量和auto
+int i=0,&r=i;
+auto a=r;//a是一个整数（r是i的别名，而i是一个整数）
+
+！auto一般会忽略掉顶层const，同时底层const则会保留下来
+const int ci=i,&cr=ci;
+auto b=ci;//b是一个整数（ci的顶层const特性被忽略掉了）
+auto c=cr;//c是一个整数（cr是ci的别名，ci本身是一个顶层const）
+auto d=&i;//d是一个整型指针（整数的地址就是指向整数的指针）
+auto e=&ci;//e是一个指向整数常数的指针（对常量对象取地址是一种底层const）
+
+！如果希望推断出的auto类型是一个顶层const，需要明确指出
+const auto f=ci;//ci的推演类型是int，f是const int
+
+！还可以将引用的类型设为auto，此时原来的初始化规则仍然适用：
+auto &g=ci;	//g是一个整型常量的引用，绑定到ci
+auto &h=42;	//错误：不能为非常量引用绑定字面值
+const auto &j=42;//正确：可以为常量引用绑定字面值
+
+！符号&和*只从属某个声明符，而非基本数据类型的一部分，初始值必须是同一种类型：
+auto k=ci,&l=i;	//k是整数，l是整型引用
+auto &m=ci,*p=&ci;//m是对整型常量的引用，p是指向整型常量的指针
+//错误：i的类型是int而&ci的类型是const int
+auto &n=i,*p2=&ci;
+
+!auto定义的变量必须有初始值
+
+2.5.3 decltype类型指示符
+decltype作用是选择并返回操作数的数据类型，编译器分析表达式并得到它的类型。却不
+实际计算表达式的值：
+decltype(f()) sum=x;	//sum的类型就是函数f的返回类型
+!编译器为sum指定的类型是什么呢，就是f被调用返回的那个类型
+
+!decltype返回变量的类型，包括const和引用在内，这点与auto不一样
+const int ci=0,&cj=ci;
+decltype(ci) x=0;	//x的类型是const int
+decltype(cj) y=x;	//y的类型是const int&，y绑定到变量x
+decltype(cj) z;		//z是一个引用，必须初始化
+cj是一个引用，decltype(cj)的结果就是引用类型，因此作为引用的z必须被初始化
+！引用从来都作为其所指对象的同义词出现，只有用在decltype处是一个例外
+
+decltype和引用
+//decltype的结果可以是引用类型
+int i=42,*p=&i,&r=i;
+decltype(r+0) b;//正确：加法的结果是int，因此b是一个（未初始化的）int
+decltype(*p) c;//错误：c是int&，必须初始化
+
+！如果表达式的内容是解引用操作，则decltype将得到引用类型！！！！！！！！！！！！！！
+
+//decltype的表达式如果是加上了括号的变量，结果将是引用
+decltype((i)) d;//错误：d是int&，必须初始化
+decltype(i) e;//正确：e是一个（未初始化的）int
+！切记：decltype（（variable））（注意是双层括号）的结果永远是引用，而decltype（variable）
+结果只有当variable本身就是一个引用时才是引用。
+
+赋值是会产生引用的一类典型表达式，引用的类型就是左值的类型，i=int，则表达式i=x的类型是int&
+
+！decltype的差别：
+1.如果使用引用类型，auto会识别为其所指对象的类型，decltype则会识别为引用的类型
+2.decltype（（））双括号的差别
+int i=0,&r=i;
+//same
+atuo a=i;
+decltype(i) b=i;
+//different
+auto c=r;
+decltype(r) d=i;
+
+2.6自定义数据结构
+2.6.1定义Sales_data类型
+struct Sales_data{
+	std::string bookNo;
+	unsigned units_sold=0;
+	double revenue=0.0;
+};
+Sales_data accum,trans,*salesptr;
+
+2.6.2使用Sales_data类
+Sales_data类定义于Sales_data.h文件内
+#include <string>
+#include <iostream>
+#include "Sales_data.h"
+int main()
+{
+	Sales_data data1,data2;
+	//读入data1和data2的代码
+	//检查data1和data2的ISBN是否相同的代码
+	//如果相同，求data1和data2的总和
+}
+
+Sales_data对象读入数据
+double price=0;//书的单价，用于计算销售收入
+//读入第1笔交易：ISBN，销售数量，单价
+std::cin>>data1.bookNo>>data1.units_sold>>price;
+//计算销售收入
+data1.revenue=data1.units_sold*price;
+
+std::cin>>data2.bookNo>>data2.units_sold>>price;
+
+//读入第二笔交易
+std::cin>>data2.bookNo>>data2.units_sold>>price;
+data2.revenue=data2.unit_sold*price;
+
+输出连个Sales_data对象的和
+if(data1.bookNo==data2.bookNo){
+	unsigned totalCnt=data1.units_sold+data2.units_sold;
+	double totalRevenue=data1.revenue+data2.revenue;
+	//输入：ISBN，总销售量，总销售额，平均价格
+	std::cout<<data1.bookNo<<" "<<totalCnt<<" "<<totalRevenue<<" ";
+	if(totalCnt!=0)
+		std::cout<<totalRevenue/totalCnt<<std::endl;
+	else
+		std::cout<<"(no sales)"<<std::endl;
+	return 0;//表示成功
+}else{
+	std::cerr<<"Data must refer to the same ISBN"<<std::endl;
+	return -1;//标示失败
+}
+
+2.6.3
+!头文件保护符有效的防止重复包含的发生
+#ifndef SALES_DATA_H
+#define SALES_DATA_H
+#include <string>
+struct Sales_data{
+	std::string bookNo;
+	unsigned units_sold=0;
+	double revenue=0.0;
+};
+#endif
+
+第3章 字符串，向量和数组
+string:表示可变长字符序列
+vector:存放的是某种给定类型对象的可变长序列
+
+！命名空间的using声明
+using namespace::name;
+一旦声明了上述语句，就可以直接访问命名空间中的名字：
+
+#include <iostream>
+//using声明，当我们使用名字cin时，从命名空间std中获取它
+using std::cin;
+int main()
+{
+	int i;
+	cin>>i;	//正确：cin和std::cin含义相同
+	cout<<i;//错误：没有对应的using声明，必须使用完整的名字
+	std::cout<<i;//正确：显示地从std中使用cout
+	return 0;
+}
+!每个名字都要独立的using声明
+#include <iostream>
+using std::cin;
+using std::cout;using std::endl;
+int main()
+{
+	cout<<"Enter two numbers:"<<endl;
+	int v1,v2;
+	cin>>v1>>v2;
+	cout<<"	The sum of "<<v1<<" and "<<v2<<" is "<<v1+v2<<endl;
+	return 0;
+}
+
+!头文件不应该包含using声明
+！！在此后的代码标准库的名字都用using声明了
+
+3.2 标准库类型string
+#include <string>
+using std::string;
+
+3.2.1定义和初始化string对象
+string s1;		//默认初始化，s1是一个空字符串
+string s2=s1;		//s2是s1的副本
+string s3="hiya";	//s3是该字符串字面值的副本
+string s4(10,'c');	//s4的内容是cccccccccc
+
+！初始化string对象的方法
+string s1;			//默认初始化，s1是一个空串
+string s2(s1);||string s2=s1;   //s2是s1的副本
+string s3("value");		//s3是字面值"value"的副本，除了字面值最后的那个空字符外
+string s3="value";		//等价于s3("value"),s3是字面值"value"的副本
+string s4(n,'c');		//把s4初始化为由连续n个字符c组成的串
+
+！直接初始化和拷贝初始化
+string s5="hiya";		//拷贝初始化
+string s6("hiya");		//直接初始化
+string s7(10,'c');		//直接初始化，s7的内容是cccccccccc
+
+string s8=string(10,'c');	//拷贝初始化，s8的内容是cccccccccc
+上述语句等价于以下两句话
+string temp(10,'c');	//temp的内容是cccccccccc
+string s8=temp;		//将temp拷贝给s8
+
+3.2.2 string对象上的操作
+string 操作
+os<<s 将s写到输出流os当中，返回os
+is>>s 从is中读取字符串赋给s，字符串以空白分隔，返回is
+getline（is，s） 从is中读取一行赋给s，返回is
+s.empty（）	s为空返回true，否则返回false
+s.size()	返回s中字符的个数
+s[n]		返回s中第n个字符的引用，位置n从0计起
+s1+s2		返回s1和s2连接后的结果
+s1=s2		用s2的副本代替s1中原来的字符
+s1==s2		如果s1和s2中所含的字符完全一样，则它们相等；string对象的相等性判断对字母的大
+s1!=s2		小写敏感
+<,<=,>,>=	利用字符在字典中的顺序进行比较，且对字母的大小写敏感
+
+读写string对象
+//想要编译下面的代码还需要适当的#include语句和using声明
+int mian()
+{
+	string s;	//空字符串
+	cin>>s;		//将string对象读入s，遇到空白停止
+	cout<<s<<endl;	//输出s
+	return 0;
+}
+
+string s1,s2;
+cin>>s1>>s2;		//把第一个输入读到s1中，第二个输入读到s2中
+cout<<s1<<s2<<endl;	//输出两个string对象
+
+读取为止数量的string对象
+int main()
+{
+	string word;
+	while(cin>>word)	 //反复读取，直至到达文件末尾
+		cout<<word<<endl;//逐个输出单词，每个单词后面紧跟一个换行
+	return 0;
+}
+
+使用getline读取一整行
+int main()
+{
+	string line;
+	//每次读入一整行，直至到达文件末尾
+	while(getline(cin,line))
+		cout<<line<<endl;
+	return 0;
+}
+
+string的empty和size操作
+//每次读入一整行，遇到空行直接跳过
+while(getline(cin,line))
+	if(!line.empty())
+		cout<<line<<endl;
+
+
+string line;
+//每次读入一整行，输出其中超过80个字符的行
+while(getline(cin,line))
+	if(line.size()>80)
+		cout<<line<<endl;
+
+string::size_type类型
+
+!如果一条表达式中已经有了size()函数就不要再使用int了，这样可以避免混用int和unsigned可能带来的问题
+
+比较string对象
+string str="Hello";
+string phrase="Hello World";
+string slang="Hiya";
+对象str小于对象phrase，对象slang既大于str，也大于phrase
+
+两个string对象相加
+string s1="hello, "s2="world\n";
+string s3=s1+s2;	//s3的内容是hello， world\n
+s1+=s2;			//等价于s1=s1+s2；
+
+字面值和string对象相加
+string s1="hello",s2="world";//在s1和s2中都没有标点符号
+string s3=s1+", "+s2+'\n';
+!把string对象和字符字面值及字符串字面值混在一条语句中使用时，必须确保每个加法运算符（+）的两侧的运
+算符对象至少有一个是string：
+string s4=s1+", ";	//正确：把一个string对象和一个字面值相加
+string s5="hello"+", ";	//错误：两个运算对象都不是string
+//正确：每个加法运算符都有一个运算对象是string
+string s6=s1+", "+"world";
+string s7="hello"+", "+s2;//错误：两个运算对象都不是string
+
+string tmp=s1+", ";	//正确：加法运算符有一个运算对象是string
+s6=tmp+"world";		//正确：加法运算符有一个运算对象是string
+
+！C++语言中的字符串字面值并不是标准库类型string的对象。字符串字面值与string是不同的类型
+
+练习3.2：
+一次读入一整行
+#include <iostream>
+#include <string>
+using namespace std;
+void main()
+{
+	string mystring;
+	while(getline(cin,mystring))
+	{
+		cout<<mystring<<endl;
+	}
+}
+
+一次读入一个词
+#include <iostream>
+#include <string>
+using namespace std;
+void main()
+{
+	string mystring;
+	while(cin>>mystring)
+	{
+		cout<<mystring<<endl;
+	}
+}
+
+练习3.4
+字符串比较
+#include <iostream>
+#include <string>
+using namespace std;
+void main()
+{
+	string mystring1,mystring2;
+	cin>>mystring1>>mystring2;
+	if(mystring1!=mystring2)
+	{
+		cout<<(mystring1>=mystring2?mystring1:mystring2)<<endl;
+	}
+}
+
+字符串长度比较
+#include <iostream>
+#include <string>
+using namespace std;
+void main()
+{
+	string mystring1,mystring2;
+	cin>>mystring1>>mystring2;
+	if(mystring1.size()!=mystring2.size())
+	{
+		cout<<(mystring1.size()>=mystring2.size()?mystring1:mystring2)<<endl;
+	}
+	else 
+	{
+		cout<<"The length of these strings are the same!"<<endl;
+	}	
+}
+
+练习3.5
+#include<iostream>
+#include<string>
+using namespace std;
+void main()
+{
+	string mystring;
+	string sumstring;
+	while(getline(cin,mystring))
+	{
+		sumstring+=mystring;
+		cout<<sumstring<<endl;
+	}
+}
+分隔开来
+#include <iostream>
+#include <string>
+using namespace std;
+void main()
+{
+	string mystring;
+	string sumstring;
+	while(getline(cin,mystring))
+	{
+		sumstring=sumstring+mystring+" ";
+		cout<<sumstring<<endl;
+	}
+}
+
+3.2.3 处理string对象中的字符
+cctype头文件中的函数
+isalnum(c)	当c是字母或数字时为真
+isalpha(c)	当c是字母时为真
+iscntrl(c)	当c是控制字符时为真
+isdigit(c) 	当c是数字时为真
+isgraph(c)	当c不是空格但可以打印时为真
+islower(c)	当c是小写字母时为真
+isprint(c)	当c是可打印字符时为真（即c是空格或c具有可视形式）
+ispunct(c)	当c是标点符号时为真（即c不是控制字符，数字，字母，可打印空白中的一种）
+isspace(c)	当c是空白时为真（即c是空格，横向制表符，纵向制表符，回车符，换行符，进纸符中的一种）
+isupper(c)	当c是大写字母时为真
+isxdigit(c)	当c是十六进制数字时为真
+tolower(c)	如果c是大写字母，输出对应的小写字母；否则原样输出c
+toupper(c)	如果c是小写字母，输出对应的大写字母；否则原样输出c
+
+处理每个字符？使用基于范围的for语句
+for(declaration:expression)
+	statement
+
+string str("some string");
+//每行输出str中的一个字符
+for(auto c:str)		//对于str中的每个字符
+	cout<<c<<endl;	//输出当前字符，后面紧跟一个换行符
+
+统计string对象中标点符号的个数
+string s("Hello World!!!");
+//punch_cnt的类型和s.size的返回类型一样;
+decltype(s.size()) punct_cnt=0;
+//统计s中标点符号的数量
+for(auto c:s)		//对于s中的每个字符
+	if(ispunct(c))	//如果该字符是标点符号
+		++punct_cnt;//将标点符号的计数值加1
+cout<<punct_cnt<<" punctuation characters in "<<s<<endl;
+
+使用范围for语句改变字符串中的字符
+！必须把循环变量定义成引用类型
+把字符串全部改成大写
+string s("Hello World!!!");
+//转换成大写形式
+for(auto &c:s)
+	c=toupper(c);	//c是一个引用，因此赋值语句将改变s中字符的值
+cout<<s<<endl;
+
+只处理一部分字符？
+访问string对象中的单个字符有两种：1.使用下标 2.使用迭代器
+下标运算符[]
+接收的输入参数是string::size_type类型的值；返回值是该位置上字符的引用
+
+！某个下标或者索引是带符号类型的值将自动转换成由string::size_type表达的无符号类型
+if(!s.empty())			//确保确实有字符需要输出
+	cout<<s[0]<<endl;	//输出s的第一个字符
+
+只要字符串不是常量，就能为下标运算符返回的字符赋新值
+string s("some string");
+if(!s.empty())	//确保s[0]的位置确实有字符
+	s[0]=toupper(s[0]);
+
+使用下标执行迭代
+把s的第一个词改写成大写形式:
+//依次处理s中的字符直至我们处理完全部字符或遇到一个空白
+for(decltype(s.size()) index=0;index!=s.size() && !isspace(s[index]);++index)
+	s[index]=toupper(s[index]);	//将当前字符改写成大写形式
+
+使用下标执行随机访问
+把0到15之间的十进制数转换成对应的十六进制形式，只需初始化一个字符串令其存放16个十六进制“数字”
+
+const string hexdigits="0123456789ABCDEF";	//可能的十六进制数字
+cout<<"Enter a series of numbers between 0 and 15"
+    <<" separated by spaces. Hit ENTER when finished: "
+    <<endl;
+string result;	//用于保存十六进制的字符串
+string::size_type n;	//用于保存从输入流读取的数
+while(cin>>n)
+	if(n<hexdigits.size())
+		result+=hexdigits[n];
+cout<<"Your hex number is: "<<result<<endl;
+
+练习3.6
+#include <iostream>
+#include <string>
+using namespace std;
+void main()
+{
+	string mystring("sdfsdfaf");	
+	for(decltype(mystring.size()) n=0;n!=mystring.size();n++)
+		mystring[n]='X';
+	cout<<mystring<<endl;
+}
+
+练习3.10
+#include <iostream>
+#include <string>
+using namespace std;
+void main()
+{
+	string mystring("fsadfsdfasdfs.,rgreg,rg.,,");
+	for(decltype(mystring.size()) i=0;i<mystring.size();i++)
+		if(!ispunct(mystring[i]))
+			cout<<mystring[i];
+}
+
+3.3 标准库类型vector
+vector容器
+使用vector包含头文件
+#include <vector>
+using std::vector;
+
+vector是一个类模板
+模板本身不是类或函数，相反可以将模板看作为编译器生成类或函数编写的一份说明。编译器根据模板创建类或函数的过程称为实例化。
+
+vector<int> ivec;		//ivec保存int类型的对象
+vector<Sales_item> Sales_vec;	//保存Sales_item类型的对象
+vector<vector<string>> file;	//该向量的元素是vector对象
+
+vector是模板而非类型，由vector生成的类型必须包含vector中元素的类型，例如vector<int>
+vector不能包含引用
+
+！某些编译器可能仍需以老式的声明语句来处理元素为vector的vector对象，如vector<vector<int> >
+
+3.3.1 定义和初始化vector对象
+初始化vector对象的方法
+vector<T> v1		v1是一个空vector，它潜在的元素是T类型的，执行默认初始化
+vector<T> v2(v1)	v2中包含有v1所有元素的副本
+vector<T> v2=v1		等价于v2(v1),v2中包含v1所有的副本
+vector<T> v3(n,val)	v3包含了n个重复的元素，每个元素的值都是val
+vector<T> v4(n)		v4包含了n个重复地执行了值初始化的对象
+vector<T> v5{a,b,c...}	v5包含了初始值个数的元素，每个元素被赋予相应的初始值
+vector<T> v5={a,b,c...} 等价于v5{a，b，c...}
+
+vector<string> svec;	//默认初始化，svec不含任何元素
+
+！可以在定义vector对象时指定元素的初始值，注意两个vector对象的类型必须相同
+vector<int> ivec;	//初始状态为空
+//在此处给ivec添加一些值
+vector<int> ivec2(ivec);//把ivec的元素拷贝给ivec2
+vector<int> ivec3=ivec;	//把ivec的元素拷贝给ivec3
+vector<string> svec(ivec2);//错误：svec的元素是string对象，不是int
+
+列表初始化vector对象
+vector<string> articles={"a","an","the"};
+
+!使用拷贝初始化时，只能提供一个初始值，如果提供一个类内初始值，只能使用拷贝
+初始化或使用花括号的形式初始化，如果提供是初始化元素值的列表，只能把初始值都
+放在花括号里进行列表初始化，不能放在圆括号里
+vector<string> v1{"a","an","the"};//列表初始化
+vector<string> v1("a","an","the");//错误
+
+创建指定数量的元素
+vector<int> ivec(10,-1);	//10个int类型的元素，每个都被初始化为-1
+vector<string> svec(10,"hi!");	//10个string类型的元素，
+				//每个都被初始化为"hi!"
+
+值初始化
+vector<int> ivec(10);	//10个元素，每个都初始化为0
+vector<string> svec(10);//10个元素，每个都是空string对象
+
+vector<int> vi=10;	//错误：必须使用直接初始化的形式指定向量大小
+
+列表初始值还是元素数量？
+vector<int> v1(10);		//v1有10个元素，每个的值都是0
+vector<int> v2{10};		//v2有1个元素，该元素的值是10
+
+vector<int> v3(10,1);		//v3有10个元素，每个的值都是1
+vector<int> v4{10,1};		//v4有2个元素，值分别是10和1
+
+vector<string> v5{"hi"};	//列表初始化：v5有一个元素
+vector<string> v6("hi");	//错误：不能使用字符串字面值构建vector对象
+vector<string> v7{10};		//v7有10个默认初始化的元素
+vector<string> v8{10,"hi"};	//v8有10个值为"hi"的元素
+
+3.3.2 向vector对象中添加元素
+push_back负责把一个值当成vector对象的尾元素“压到”vector对象的尾端
+vector<int> v2;	//空vector对象
+for(int i=0;i!=100;++i)
+	v2.push_back(i);//依次把整数值放到v2尾端
+//循环结束后v2有100个元素，值从0到99
+
+实时读入数据然后将其赋予vector对象
+//从标准输入中读取单词，将其作为vector对象的元素存储
+string word;
+vector<string> text;	//空vector对象
+while(cin>>word){
+	text.push_back(word);//把word添加到text后面
+}
+！隐含的要求：如果循环体内部包含有向vector对象添加元素的语句，则不能使用范围
+for循环
+范围for语句体内不应改变其所遍历的大小
+
+练习3.14
+用cin读入一组整数并把它们存入一个vector对象
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+	vector<int> My_vector;
+	int iint;
+	while(cin>>iint){
+		My_vector.push_back(iint);
+	}
+	return 0;
+}
+修改读入字符串
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+int main()
+{
+	vector<string> My_vector;
+	string istring;
+	while(cin>>istring){
+		My_vector.push_back(istring);
+	}
+	return 0;
+}
+
+3.3.3 其他vector操作
+v.empty()		如果v不含有任何元素，返回真；否则返回假
+v.size()		返回v中元素的个数
+v.push_back(t)		向v的尾端添加一个值为t的元素
+v[n]			返回v中第n个位置上元素的引用
+v1=v2			用v2中元素的拷贝替换v1中的元素
+v1={a,b,c...}		用列表中元素的拷贝替换v1中的元素
+v1==v2			v1和v2相等当且仅当它们的元素数量相同且对应位置的元素值都相同
+v1!=v2
+<,<=,>,>=		顾名思义，以字典顺序进行比较
+
+访问vector对象中元素
+vector<int> v{1,2,3,4,5,6,7,8,9};
+for(auto &i:v)		//对于v中的每个元素（注意：i是一个引用）
+	i*=i;		//求元素值的平方
+for(auto i:v)		//对于v中的每个元素
+	cout<<i<<" ";	//输出该元素
+cout<<endl;
+
+!要使用size_type，首先指定它是由哪种类型定义的。vector对象的类型总是包含着元素的类型
+vector<int>::size_type	//正确
+vector::size_type	//错误
+
+计算vector内对象的索引
+
+统计分数段成绩
+42 65 95 100 39 67 95 76 88 76 83 92 76 93
+输出结果
+0 0 0 1 1 0 2 3 2 4 1
+
+//以10分为一个分数段统计成绩的数量：0-9,10-19,...，90-99，100
+vector<unsigned> scores(11,0);   //11个分段，全部初始化为0
+unsigned grade;
+while(cin>>grade){	//读取成绩
+	if(grade<=100)	//只处理有效的成绩
+		++scores[grade/10];  //将对应分数段的计数值加1
+}
+
+不能用下标形式添加元素
+vector<int> ivec;	//空vector对象
+for(decltype(ivec.size()) ix=0;ix!=10;++ix)
+	ivec[ix]=ix;	//严重错误：ivec不包含任何元素
+
+for(decltype(ivec.size()) ix=0;ix!=10;++ix)
+	ivec.push_back(ix);//正确：添加一个元素，该元素的值是ix
+
+vector对象（以及string对象）的下标运算符可用于访问已存在的元素，而不能用于添加元素
+
+！只能对确知已存在的元素执行下标操作！
+vector<int> ivec;	//空vector对象
+cout<<ivec[0];		//错误：ivec不包含任何元素
+
+vector<int> ivec2(10);	//含有10个元素的vector对象
+cout<<ivec2[10];	//错误：ivec2元素的合法索引是从0到9
+
+！通过下标访问不存在的元素将引发错误，叫做缓冲区溢出（buffer overflow），这种错误不会
+被编译器发现，而是在运行时产生一个不可预知的值
+确保下标合法的一种手段就是尽可能使用范围for语句
+
+练习3.17
+从cin读入一组词并把它们存入一个vector对象，然后设法把所有词都改写为大写形式。输出改
+变后的结果，没个词占一行
+
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+void main()
+{
+	string istring;
+	vector<string> My_vector;
+	while(cin>>istring){
+		My_vector.push_back(istring);
+	}
+	for(decltype(My_vector.size()) i=0;i!=My_vector.size();i++)
+		for(decltype(istring) j=0;j!=My_vector[i].size();j++){
+			My_vector[i][j]=toupper(My_vector[i][j]);
+		}
+	for(decltype(My_vector.size()) i=0;i!=My_vector.size();i++){
+		cout<<My_vector[i]<<endl;
+	}
+}
+
+练习3.20 读入一组整数并把它们存入一个vector对象，将每对相邻整数的和输出出来。
+改写程序将第1个和最后1个元素的和输出，2和倒数第2个元素的和，以此类推
+程序一
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+void main()
+{
+	vector<int> My_vector;
+	int number;
+	while(cin>>number){
+		My_vector.push_back(number);
+	};
+	for(decltype(My_vector.size()) i=0;i!=My_vector.size();i++){
+		cout<<My_vector[i]+My_vector[i+1]<<endl;
+		i++;
+	}
+}
+程序二
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+void main()
+{
+	vector<int> My_vector;
+	int number;
+	while(cin>>number){
+		My_vector.push_back(number);
+	};
+	for(decltype(My_vector.size()) i=0;i!=My_vector.size()/2;i++){
+		cout<<My_vector[i]+My_vector[My_vector.size()-1-i]<<endl;
+	}
+}
+
+3.4 迭代器(iterator)介绍
+所有标准库容器都可以使用迭代器，只有少数几种才能同时支持下标运算符
+迭代器有有效和无效之分
+
+3.4.1 使用迭代器
+有迭代器的类型同时拥有返回迭代器的成员，比如，都拥有begin和end的成员，begin
+负责返回指向第一个元素的迭代器,end成员则负责返回指向容器（或string对象）尾元
+素的下一位置的迭代器，end成员返回的迭代器常被称作尾后迭代器，简称尾迭代器，如果
+容器为空，begin和end返回的是同一个迭代器，都是尾后迭代器
+//由编译器决定b和e的类型
+//b表示v的第一个元素，e表示v尾元素的下一位置
+auto b=v.begin(),e=v.end();//b和e的类型相同
+
+迭代器运算符
+使用==和!=来比较两个合法的迭代器是否相等
+
+标准容器迭代器的运算符
+*iter		返回迭代器iter所指元素的引用
+iter->mem	解引用iter并获取该元素的名为mem成员，等价于(*iter).mem
+++iter		令iter指示容器中的下一个元素
+--iter		令iter指示容器中的上一个元素
+iter1==iter2	判断两个迭代器是否相等（不相等），如果两个迭代器指示的是同一个元素
+iter1!=iter2		或者它们是同一个容器的尾后迭代器，则相等；反之，不相等	
+
+把string对象的第一个字母改成大写
+string s("some string");
+if(s.begin()!=s.end()){		//确保s非空
+	auto it=s.begin();	//it表示s的第一个字符
+	*it=toupper(*it);	//将当前字符改成大写	
+}
+
+将迭代器从一个元素移动到另外一个元素
+！因为end返回的迭代器并不实际指示某个元素，所以不能对其进行递增或解引用的操作
+
+把string对象中第一个单词改写为大写形式
+//依次处理s的字符直至我们处理完全部字符或者遇到空白
+for(auto it=s.begin();it!=s.end()&&!isspace(*it);++it)
+	*it=toupper(*it);	//将当前字符改成大写形式
+
+迭代器类型
+iterator和const_iterator表示迭代器的类型
+vector<int>::iterator it;	//it能读写vector<int>的元素
+string::iterator it2;		//it2能读写string对象中的字符
+
+vector<int>::const_iterator it3;	//it3只能读元素，不能写元素
+string::const_iterator it4;		//it4只能读字符，不能写字符
+
+begin和end运算符
+返回的具体类型由对象是否是常量决定，如果是常量，返回const_iterator，如果对象不
+是常量，返回iterator
+vector<int> v;
+const vector<int> cv;
+auto it1=v.begin();	//it1的类型是vector<int>::iterator
+auto it2=cv.cbegin();	//it2的类型是vector<int>::const_iterator
+
+auto it3=v.cbegin();	//it3的类型是vector<int>::const_iterator
+cbegin和cend返回的是const_iterator
+
+结合解引用和成员访问操作
+一个字符串组成的vector对象,检查是否为空
+(*it).empty()	//()必不可少
+
+(*it).empty()	//解引用it，然后调用结果对象的empty成员
+*it.empty()	//错误:试图访问it的名为empty的成员，显然it是个迭代器，
+		//没有empty成员
+
+箭头运算符（->）
+//依次输出text的每一行直至遇到第一个空白行为止
+for(auto it=text.cbegin();it!=text.cend()&&!it->empty();++it)
+	cout<<*it<<endl;
+
+对某些vector对象的操作会使迭代器失效
+不能在范围for循环中向vector对象添加元素。任何一种可能改变vector对象容
+量的操作，比如push_back,都会使该vector对象的迭代器失效
+！凡是使用了迭代器的循环体，都不要向迭代器所属的容器添加元素
+
+练习3.23
+创建含有10个整数的vector对象，然后使用迭代器将所有元素的值都变成原来的
+两倍，输出vector对象的内容
+#include<iostream>
+#include<vector>
+using namespace std;
+void main()
+{
+	vector<int> text(10,5);
+	for(auto it=text.begin();it!=text.end();++it){
+		*it=(*it)*2;
+		cout<<*it<<endl;
+	}
+}
+
+3.4.2 迭代器运算
+string和vector迭代器提供了更多额外的运算符
+iter+n		迭代器加上一个整数值仍得一个迭代器，迭代器指示的新位置
+与原来相比向前移动了若干个元素。结果迭代器或者指示容器内的一个元素，或
+者指示容器尾元素的下一个位置
+iter-n		迭代器减去一个整数值仍得一个迭代器，迭代器知识的新位置
+与原来相比向后移动了若干个元素。结果迭代器或者指示容器内的一个元素，或
+者指示容器尾元素的下一位置
+iter1 +=n
+iter1 -=n
+iter1-iter2	两个迭代器相减的结果是它们之间的距离，也就是说，将运算
+符右侧的迭代器向前移动差值个元素后将得到左侧的迭代器。参与运算的两个迭
+代器必须指向的是同一个容器中的元素或者尾元素的下一位置
+>,>=,<,<=	迭代器的关系运算符，如果某迭代器指向的容器位置在另一个
+迭代器所指位置之前，则说前者小于后者。参与运算的两个迭代器必须指向的是
+同一个容器中的元素或者尾元素的下一位置。
+
+迭代器的算术运算
+//计算得到最接近vi中间元素的一个迭代器
+auto mid=vi.begin()+vi.size()/2;
+
+迭代器距离的类型是difference_type，带符号类型的
+
+使用迭代器运算
+二分搜索
+//text必须是有序的
+//beg和end表示了我们搜索的范围
+auto beg=text.begin(),end=text.end();
+auto mid=text.begin()+(end-beg)/2;	//初始状态下的中间点
+while(mid!=end&&*mid!=sought){		//当还有元素尚未检查并且我们还没有找到sought时执行循环
+	if(sought<*mid)			//我们要找的元素在前半部分吗？
+		end=mid;		//如果是，调整搜素范围使得忽略掉后半部分
+	else				//我们要找的元素在后半部分
+		beg=mid+1;		//在mid之后寻找
+	mid=beg+(end-beg)/2;		//新的中间点
+}
+
+练习3.24 读入一组整数并把它们存入一个vector对象，将第1个和最后1个元素的和输出，
+2和倒数第2个元素的和，以此类推
+#include<iostream>
+#include<vector>
+using namespace std;
+void main()
+{
+	vector<int> My_vector;
+	int number;
+	while(cin>>number){
+		My_vector.push_back(number);
+	}
+	for(auto beg=My_vector.begin(),end=My_vector.end();beg!=end;beg++){
+		end--;
+		cout<<*beg+*end<<endl;
+	}
+}
+
+练习3.25
+统计输入成绩的分数段
+#include<iostream>
+#include<vector>
+using namespace std;
+void main()
+{
+	vector<int> grade(10,0);
+	int number;
+	while(cin>>number){
+		if(number>100){
+			cout<<"The input number is wrong!"<<endl;
+			break;			
+		}
+		auto it=grade.begin();
+		++(*(it+number/10));			
+	}
+	for(auto i=grade.begin();i!=grade.end();i++){
+		cout<<*i<<endl;
+	}	
+}
+
+练习3.26 在二分搜索中，为什么用的是mid=beg+(end-beg)/2,而非mid=(beg+end)/2?
+答：因为end指的是最后一个元素的后一个位置
+
+3.5 数组
+!如果不清楚元素的确切个数，请使用vector
+3.5.1 定义和初始化数组
+a[d]//d是数组的维度，必须是常量表达式
+unsigned cnt=42;		//不是常量表达式
+constexpr unsigned sz=42;	//常量表达式
+int arr[10];			//含有10个整数的数组
+int *parr[sz];			//含有42个整数指针的数组
+string bad[cnt];		//错误：cnt不是常量表达式
+string strs[get_size()];	//当get_size()是constexpr时正确；否则错误
+
+在函数内部定义了某种内置类型的数组，那么默认初始化会令数组含有未定义的值
+不允许auto关键字有初始化的列表推断类型
+
+显式初始化数组元素
+const unsigned sz=3;
+int ia1[sz]={0,1,2};		//含有3个元素的数组，元素值分别是0,1,2
+int a2[]={0,1,2};		//维度是3的数组
+int a3[5]={0,1,2};		//等价于a3[5]={0,1,2,0,0}
+string a4[3]={"hi","bye"};	//等价于a4[4]={"hi","bye",""}
+int a5[2]={0,1,2};		//错误：初始值过多
+
+字符数组的特殊性
+char a1[]={'C','+','+'};	//列表初始化，没有空字符
+char a2[]={'C','+','+','\0'};	//列表初始化，含有显式的空字符
+char a3[]="C++";		//自动添加表示字符串结束的空字符
+const char a4[6]="Daniel";	//错误：没有空间可存放空字符！
+
+不允许拷贝和赋值
+不能将数组的内容拷贝给其他数组作为其初始值，也不能用数组为其他数组赋值：
+int a[]={0,1,2};	//含有3个整数的数组
+int a2[]=a;		//错误：不允许使用一个数组初始化另一个数组
+a2=a;			//错误：不能把一个数组直接赋值给另一个数组
+
+理解复杂的数组声明
+int *ptrs[10];		//ptrs是含有10个整型指针的数组
+int &refs[10]=/*?*/;	//错误：不存在引用的数组
+int (*Parray)[10]=&arr;	//Parray指向一个含有10个整数的数组
+int (&arrRef)[10]=arr;	//arrRef引用一个含有10个整数的数组
+
+int *(&arry)[10]=ptrs;	//arry是数组的引用，该数组含有10个指针
+
+！要想理解数组声明的含义，最好的办法是从数组的名字开始按照由内而外的顺序阅读
+
+3.5.2 访问数组元素
+使用数组下标时，通常定义为size_t类型，是一种机器相关的无符号类型，它被设计的足够大以便表示内存中
+任意对象的大小。在cstddef头文件中定义了size_t类型，这个文件是C标准库stddef.h头文件的C++语言版本
+
+//以10分为一个分数段统计成绩的数量：0-9,10-19，... ,90-99,100
+unsigned scores[11]={};	//11个分数段，全部初始化为0
+unsigned grade;
+while(cin>>grade){
+	if(grade<=100)
+		++scores[grade/10];	//将当前分数段的计数值加1
+}
+本例中的下标运算符由C++语言直接定义的，这个运算符能用在数组类型的运算对象上
+
+//输出所有的scores
+for(auto i:scores)	//对于scores中的每个计数值
+	cout<<i<<" ";
+cout<<endl;
+
+!大多数常见的安全问题都源于缓冲区溢出错误，当数组或其他类似数据结构的下标越界并试图访问非法内存区
+域时，就会产生此类错误
+
+练习3.31 编写一段程序，定义一个含有10个int的数组，令每个元素的值就是其下标值
+#include<iostream>
+using namespace std;
+void main()
+{
+	constexpr size_t array_size=10;
+	int ia[array_size];
+	for(size_t ix=1;ix<=array_size;++ix)
+		ia[ix]=ix;
+}
+
+练习3.32 将上题的数组拷贝给另外一个数组。利用vector重写程序，实现类似的功能
+#include<iostream>
+using namespace std;
+void main()
+{
+	constexpr size_t array_size=10;
+	int a[10]={0,1,2,3,4,5,6,7,8,9};
+	int b[array_size];
+	for(size_t i=0;i!=array_size;i++)
+	{
+		b[i]=a[i];
+	}
+}
+vector版本
+#include<vector>
+using namespace std;
+void main()
+{
+	vector<int> ivec1(10,20);	//每个元素初始化为20
+	vector<int> ivec2;
+	for(vector<int>::iterator iter=ivec1.begin();iter!=ivec1.end();++iter){
+		ivec2.push_back(*iter);
+	}
+	return 0;	
+}
+
+练习3.33 对于下列程序，如果不初始化scores将发生什么
+//以10分为一个分数段统计成绩的数量：0-9,10-19，... ,90-99,100
+unsigned scores[11]={};	//11个分数段，全部初始化为0
+unsigned grade;
+while(cin>>grade){
+	if(grade<=100)
+		++scores[grade/10];	//将当前分数段的计数值加1
+}
+
+answer：If we did not initialize the scores array,the array is undefined,the value will be unknow;
+
+3.5.3 指针和数组
+C++中，使用数组的时候编译器一般会把它转换成指针
+string nums[]={"one","two","three"};	//数组的元素是string对象
+string *p=&nums[0];			//p指向nums的第一个元素
+
+在很多用到数组名字的地方，编译器会自动将其替换为一个指向数组首元素的指针
+string *p2=nums;	//等价于p2=&nums[0]
+
+!在大多数表达式中，使用数组类型的对象其实是使用一个指向该数组首元素的指针
+int ia[]={0,1,2,3,4,5,6,7,8,9};//ia是一个含有10个整数的数组
+auto ia2(ia);		//ia2是一个整型指针，指向ia的第一个元素
+ia2=42;			//错误:ia2是一个指针，不能用int值给指针赋值
+编译器执行的初始化过程类似下面形式
+auto ia2(&ia[0]);	//显然ia2的类型是int*
+
+当使用decltype关键字时，decltype(ia)返回的类型是由10个整数构成的数组:
+//ia3是一个含有10个整数的数组
+decltype(ia) ia3=[0,1,2,3,4,5,6,7,8,9];
+ia3=p;		//错误：不能用整型指针给数组赋值
+ia3[4]=i;	//正确：把i的值赋给ia3的一个元素
+
+指针也是迭代器
+vector和string的迭代器支持的运算，数组的指针全部支持
+int arr[]={0,1,2,3,4,5,6,7,8,9};
+int *p=arr;	//p指向arr的第一个元素
+++p;		//p指向arr[1]
+
+int *e=&arr[10];//指向arr尾元素的下一个位置的指针
+//输出arr的全部元素
+for(int *b=arr;b!=e;b++)
+	cout<<*b<<endl;//输出arr的元素
+
+标准库函数begin和end
+这两个函数不是成员函数，使用形式是将数组作为它们的参数
+int ia[]={0,1,2,3,4,5,6,7,8,9};//ia是一个含有10个整数数组
+int *beg=begin(ia);	//指向ia首元素的指针
+int *last=end(ia);	//指向arr尾元素的下一位置的指针
+这两个函数定义在iterator头文件中
+
+//找到arr中的第一个负数
+//pbeg指向arr的首元素，pend指向arr尾元素的下一位置
+int *pbeg=begin(arr),*pend=end(arr);
+//寻找第一个负值元素，如果已经检查完全部元素则结束循环
+while(pbeg!=pend&&*pbeg>0)
+	++pbeg;
+
+!一个指针如果指向了某种内置类型数组的尾元素的“下一位置”，则其具备与vector的end函数返回的与迭代器
+类似的功能。尾后指针不能执行解引用和递增操作
+
+指针运算
+constexpr size_t sz=5;
+int arr[sz]={1,2,3,4,5};
+int *ip=arr;	//等价于int *ip=&arr[0];
+int *ip2=ip+4;	//ip2指向arr的尾元素arr[4]
+
+//正确：arr转换成指向它首元素的指针；p指向arr尾元素的下一位置
+int *p=arr+sz;//使用警告：不要解引用！
+int *p2=arr+10;//错误：arr只有5个元素，p2的值未定义
+
+两个指针相减的结果是它们之间的距离，两个指针必须指向同一个数组当中的元素
+auto n=end(arr)-begin(arr);//n的值是5，也就是arr中元素的数量
+两个指针相减的结果的类型是一种名为ptrdiff_t的标准库类型，和size_t一样，ptrdiff_t也是一种定义在cstddef
+头文件中的机器相关的类型，因为差值可能为负，ptrdiff_t是一种带符号的类型
+
+//遍历数组中的元素
+int *b=arr,*e=arr+sz;
+while(b<e){
+	//使用*b
+	++b;
+}
+如果两个指针分别指向不相关的对象，不能比较它们
+int i=0,sz=42;
+int *p=&i,*e=&sz;
+//p和e无关，比较毫无意义
+while(p<e)
+
+上述运算同样适用于空指针和所指对象并非数组的指针，后一种情况，两个指针必须指向同一个对象或该对象的下
+一位置。如果p是空指针，允许给p加上或减去一个值为0的整形常量表达式，两个空指针也允许彼此相减，结果当然
+是0
+
+解引用和指针运算的交互
+int ia[]={0,2,4,6,8};//含有5个整数的数组
+int last=*(ia+4);    //正确：把last初始化成8，也就是ia[4]的值
+
+last=*ia+4;//正确：last=4等价于ia[0]+4
+
+下标和指针
+int ia[]={0,2,4,6,8};//含有5个整数的数组
+
+对数组执行下表运算其实是对指向数组的元素的指针执行下标运算；
+int i=ia[2];	//ia转换成指向数组首元素的指针
+		//ia[2]得到(ia+2)所指的元素
+int *p=ia;	//p指向ia的首元素
+i=*(p+2);	//等价于i=ia[2]
+
+只要指针指向的是数组中的元素（或者尾元素的下一位置），都可以执行下标运算
+int *p=&ia[2];	//p指向索引为2的元素
+int j=p[1];	//p[1]等价于*(p+1),就是ia[3]表示的那个元素
+int k=p[-2];	//p[-2]是ia[0]表示的那个元素
+
+！内置的下标运算符所用的索引值不是无符号类型，这一点与vector和string不一样
+
+3.5.4 C风格字符串
+C标准库String函数
+cstring头文件
+strlen(p)
+strcmp(p1,p2)
+strcat(p1,p2)
+strcpy(p1,p2)
+
+传入此类函数的指针必须指向以空字符作为结束的数组
+
+比较字符串
+使用标准库string要比使用C风格字符串更安全，更高效
+
+练习3.40
+#include<iostream>
+#include<string>
+using namespace std;
+void main()
+{
+	char a[100]="Hello World";
+	char b[100]="I want an apple";
+	char c[200];
+	strcmp(c,a);
+	strcat(c," ");
+	strcmp(c,b);
+	cout<<c;
+}
+
+3.5.5 与旧代码的接口
+混用string和C风格字符串
+！允许使用以空字符结束的字符数组来初始化string对象或为string对象赋值
+在string对象的加法运算中允许使用以空字符结束的字符数组作为其中一个运算对象；在string对象的复合赋值运算中
+允许使用以空字符结束的字符数组作为右侧的运算对象
+
+char *str=s;	//错误：不能用string对象初始化char*
+const char *str=s.c_str();	//正确
+c_str函数的返回值是一个C风格的字符串。返回结果是一个指针，指向一个空字符结束的字符数组
+我们无法保证c_str函数返回的数组一直有效，改变了s的值就可能让之前返回的数组失去效用
+如果执行完c_str()函数后程序想一直都能使用其返回的数组，最好将该数组重新拷贝一份
+
+使用数组初始化vector对象
+int int_arr[]={0,1,2,3,4,5};
+//ivec有6个元素，分别是int_arr中对应元素的副本
+vector<int> ivec(begin(int_arr),end(int_arr));
+//拷贝三个元素
+vector<int> subVec(int_arr+1,int_arr+4);
+
+!现代C++程序应当尽量使用vector和迭代器，避免使用内置数组和指针；应该尽量使用string，避免使用C风格的基于数组的字符串
+
+3.6 多维数组
+C++语言中没有多维数组，其实是数组的数组
+int ia[3][4];	//大小为3的数组，每个元素是含有4个整数的数组
+//大小为10的数组，它的每个元素都是大小为20的数组
+//这些数组的元素是含有30个整数的数组
+int arr[10][20][30]={0};//将所有的元素初始化为0
+
+多维数组的初始化
+int ia[3][4]={	//三个元素，每个元素都是大小为4的数组
+	{0,1,2,3},	//第1行的初始值
+	{4,5,6,7},	//第2行的初始值
+	{8,9,10,11}	//第3行的初始值
+};
+
+//显式地初始化每行的首元素
+int ia[3][4]={{0},{4},{8}};
+
+//显式地初始化第1行，其余元素执行值初始化
+int ix[3][4]={0,3,6,9};
+
+多维数组的下标引用
+//用arr的首元素为ia最后一行的最后一个元素赋值
+int ia[2][3]=arr[0][0][0];
+int (&row)[4]=ia[1];	//把row绑定到ia的第二个4元素数组上
+
+constexpr size_t rowCnt=3,colCnt4;
+int ia[rowCnt][colCnt];		//12个未初始化的元素
+//对于每一行
+for(size_t i=0;i!=rowCnt;++i){
+	//对于行内的每一列
+	for(size_t j=0;j!=colCnt;++j){
+		ia[i][j]=i*colCnt+j;
+	}
+}
+
+使用范围for语句处理多维数组
+前一个程序简化如下
+size_t cnt=0;
+for(auto &row:ia)		//对于外层数组的每一个元素
+	for(auto &col:row){	//对于内层数组的每一个元素
+		col=cnt;	//将下一个值赋给该元素
+		++cnt;
+}
+
+for(const auto &row:ia)	
+	for(auto col:row)
+		cout<<col<endl;
+
+外层循环控制变量声明成引用，是为了避免数组被自动转成指针
+
+for(auto row:ia)
+	for(auto col:row)
+编译无法通过，row得到的类型是int*，内层循环不合法
+！要使用范围for语句处理多维数组，除了最内层的循环外，其他所有的循环的控制变量都应该是引用类型
+
+指针和多维数组
+int ia[3][4];	//大小为3的数组，每个元素是含有4个整数的数组
+int (*p)[4]=ia;	//p指向含有4个整数的数组
+p=&ia[2];	//p指向ia的尾元素
+
+//输出ia中每个元素的值，每个内层数组各占一行
+//p指向含有4个整数的数组
+for(auto p=ia;p!=ia+3;++p){
+	//q指向4个整数数组的首元素，也就是说，q指向一个整数
+	for(auto q=*p;q!=*p+4;++q)
+		cout<<*q<<' ';
+	cout<<endl;
+}
+
+使用begin和end
+//p指向ia的第一个数组
+for(auto p=begin(ia);p!=end(ia);++p){
+	for(auto q=begin(*p);q!=end(*p);++q)
+		cout<<*q<<' ';//输出q所指的整数值
+	cout<<endl;
+}
+
+类型别名简化多维数组的指针
+using int_array=int[4];	//新标准下类型别名的声明
+typedef int int_array[4];//等价的typedef声明
+
+//输出ia中的每个元素的值，每个内层数组各占一行
+for(int_array *p=ia;p!=ia+3;++p){
+	for(int *q=*p;q!=*p+4;++q)
+		cout<<*q<<' ';
+	cout<<endl;
+}
+
+第4章 表达式
+使用关键字decltype时候，如果表达式的求值结果是左值，decltype作用于该表达式得到一个引用类型，p的类型
+是int*，因为解引用运算符生成左值，所以decltype(*p)的结果是int&，因为取地址运算符生成右值，所以decltype(&p)
+的结果是int**，是一个指向整型指针的指针
+
+4.1.3 求值顺序
+int i=0;
+cout<<i<<" "<<i+1<<endl; //未定义的，<<运算符没有明确规定何时以及如何对运算对象求值
+
+四种运算符明确规定了运算对象的求值顺序
+&& 先左后右
+||  ?:  , 
+
+bool b=true;
+bool b2=-b;	//b2是true
+布尔值不应该参加运算
+
+(-m)/n和m/(-n)都等于-(m/n)
+m%(-n)等于m%n
+(-m)%n等于-(m%n)
+
+对于逻辑与运算符来说，当且仅当左侧运算符对象为真才对右侧运算对象求值
+对于逻辑或运算符来说，当且仅当左侧运算符对象为假才对右侧运算对象求值
+
+要求输出string对象的内容并且在遇到空字符串或者以句号结束的字符串时进行换行
+
+//s是对常量的引用；元素既没有被拷贝也不会被改变
+for(const auto &s:text){	//引用避免对string进行拷贝，使用const常量是为了防止对text进行修改
+	cout<<s;	
+	//遇到空字符串或者以句号结束的字符串进行换行
+	if(s.empty()||s[s.size()-1]=='.')
+		cout<<endl;
+	else
+		cout<<" ";//否则用空格隔开
+}
+
+进行比较运算时除非比较的对象是布尔类型，否则不要使用布尔字面值true和false作为运算对象
+
+赋值运算优先级较低
+int i;
+while((i=get_value())!=42){
+	//其他处理......
+}
+
+！因为赋值运算符的优先级低于关系运算符的优先级，所以在条件语句中，赋值部分通常应该加上括号
+
+除非必须否则不用递增递减运算符的后置版本
+
+auto pbeg=v.begin();
+//输出元素直至遇到第一个负值为止
+while(pbeg!=v.end()&&*beg>=0)
+	cout<<*pbeg++<<endl;//输出当前值并将pbeg向前移动一个元素
+
+运算对象可按任意顺序求值
+for(auto it=s.begin();it!=s.end()&&!isspace(*it);++it)
+	*it=toupper(*it);	//将当前字符改成大写形式
+
+while(beg!=s.end()&&!isspace(*beg))
+	*beg=toupper(*beg++);	//错误，该赋值语句未定义
+//运算符没有规定运算对象的求值顺序，编译器可能按照下面的任意一种思路处理该表达式
+*beg=toupper(*beg);	//如果先求左侧的值
+*(beg+1)=toupper(*beg);	//如果先求右边的值
+
+4.6 成员访问运算符
+ptr->mem等价于(*ptr).mem
+
+string s1="a string",*p=&s1;
+auto n=s1.size();
+n=(*p).size();
+n=p->size(); //与上一句等价
+
+解引用运算符的优先级低于点运算符
+
+4.7 条件运算符
+string finalgrade=(grade<60)?"fail":"pass";
+
+嵌套条件运算符
+finalgrade=(grade>90)?"high pass":(grade<60)?"fail":"pass";
+
+随着条件运算嵌套层数的增加，代码的可读性急剧下降。因此条件运算的嵌套最好别超过两到三层。
+条件运算符的优先级非常低
+cout<<((grade<60)?"fail":"pass");//输出pass或者fail
+cout<<(grade<60)?"fail":"pass";	//输出1或者0
+cout<<grade<60?"fail":"pass";	//错误：试图比较cout和60
+
+第二条等价于
+cout<<(grade<60);
+cout?"fail":"pass";
+
+第三条等价于
+cout<<grade;	//小于运算符优先级低于移位运算符，所以先输出grade
+cout<60?"fail":"pass";	//然后比较cout和60！
+
+练习4.21
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+int main()
+{
+	vector<int> vec;
+	for(int i=0;i<10;++i){
+		vec.push_back(i);
+	}
+	for(decltype(vec.size()) i=0;i<vec.size();++i){
+		vec[i]=(vec[i]%2==0)?vec[i]:vec[i]*2;
+		cout<<vec[i]<<endl;
+	}
+}
+
+练习4.22
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+int final_frade;
+int main()
+{
+	while(cin>>final_grade){
+		(cout<<(final_grade>90)?"high pass":(final_grade>60&&final_grade<75)?"low pass":(final_grade<60)?"fail":"pass"))<<endl;
+	}
+}
+
+4.8 位运算符
+bitset的标准库类型可以表示任意大小的二进制集合
+
+unsigned long quiz1=0;	
+1UL<<27	//UL:unsigned long,生成一个值，该值只有第27位为1
+quiz1|=1UL<<27;	//表示学生27通过了检测
+
+quiz1&=~(1UL<<27);  //学生27没有通过检测
+
+bool status=quiz1&(1UL<<27);	//学生27是否通过了检测
+
+移位运算符（又叫IO运算符）满足左结合律
+cout<<42+10;	//正确：+优先级更高
+cout<<(10<42);	//正确
+cout<<10<42;	//错误
+
+4.9 sizeof运算符 
+满足右结合律，所得的值是一个size_t类型的常量表达式
+sizeof(type)
+sizeof expr//返回的是表达式结果类型的大小
+
+Sales_data data,*p;
+sizeof(Sales_data);		//存储Sales_data类型的对象所占空间大小
+sizeof data;			//data的类型的大小，即sizeof(Sales_data)
+sizeof p;			//指针所占的空间大小
+sizeof *p;			//p所指类型的空间大小，即sizeof(Sales_data)
+sizeof data.revenue;		//Sales_data的revenue成员对应类型的大小
+sizeof Sales_data::revenue;	//另一种获取revenue大小的方式
+
+sizeof不需要真的解引用指针也能知道他所指对象的类型
+
+sizeof运算符的结果部分地依赖于其作用的类型：
+对char或类型为char的表达式执行sizeof运算，结果得1
+对引用类型执行sizeof运算得到被引用对象所占空间的大小
+对指针执行sizeof运算得到指针本身所占空间的大小
+对解引用指针执行sizeof运算得到的指针指向的对象所占空间的大小，指针不需要有效
+对数组执行sizeof运算得到整个数组所占空间的大小，不会把数组转换成指针来处理
+对string对象或vector对象执行sizeof运算只返回该类型固定部分的大小，不会计算对象中的元素占用了多少空间
+
+//sizeof(ia)/sizeof(*ia) 返回ia的元素数量
+constexpr size_t sz=sizeof(ia)/sizeof(*ia);
+int arr2[sz];
+
+算数转换
+bool 	       falg;
+short 	       sval;
+int   	       ival;
+long           lval;
+float          fval;
+char           cval;
+unsigned short  usval;
+unsigned int   uival;
+unsigned long  ulval;
+double	       dval;
+
+3.14159L+'a';	//'a'提升成int，然后该int值转换成long double
+dval+ival;	//ival转换成double
+dval+fval;	//fval转换成double
+ival=dval;	//dval转换成（切除小数部分后）int
+flag=dval;	//如果dval是0，则flag是false，否则flag是true
+cval+fval;	//cval提升成int，然后int值转换成float
+sval+cval;	//sval和cval都提升成int
+cval+lval;	//cval转换成long
+ival+ulval;	//ival转换成usigned long;
+usval+ival;	//根据unsigned short和int所占空间的大小进行提升
+uival+lval;	//根据unsigned int和long所占空间的大小进行转换
+
+4.11.2
+数组转换成指针
+在大多数用到数组的表达式中，数组自动转换成指向数组首元素的指针
+数组被用作decltype关键字的参数，或者作为取地址&，sizeof及typeid等运算符的运算对象时，上述转换不会发生，引用也不会发生
+
+指针的转换：常量整数值0或者字面值nullptr能转换成任意指针类型；指向任意非常量的指针可以转换成void*；指向任意对象的指针
+能转换成const void*
+
+转换成布尔类型
+
+转换成常量
+int i;
+const int &j=i;		//非常量转换成const int的引用
+const int *p=&i;	//非常量的地址转换成const的地址
+int &r=j,*q=p;		//错误：不允许const转换成非常量
+类类型定义的转换
+类类型能定义由编译器自动执行的转换，不过编译器每次只能执行一种类类型型的转换，如果同时提出多个转换请求，将被拒绝
+
+string s,t="a value";	//字符串字面值转换成string类型
+while(cin>>s)		//while的条件部分把cin转换成布尔值
+
+4.11.3 显示转换
+int i,j;
+double slope=i/j;//强制转换类型
+
+命名的强制类型转换
+cast-name<type>(expression);
+cast-name:static_cast,dynamic_cast//支持运行时类型识别,const_cast,reinterpret_cast
+
+static_cast
+任何具有明确定义的类型转换，只要不包含底层const，都可以使用static_cast
+//进行强制类型转换以便执行浮点数除法
+double slope=static_cast<double>(j) /i;
+static_cast对于编译器无法自动执行的类型转换也非常有用
+//使用static_cast找回存在于void*指针的值
+void* p=&d;	//正确：任何非常量对象的地址都能存入void*
+//正确：将void*转换回初始的指针类型
+double *dp=static_cast<double*>(p);
+
+const_cast
+const_cast只能改变运算对象的底层const
+const char *pc;
+char *p=const_cast<char*>(pc);	//正确：但是通过p写值是未定义的行为
+如果对象本身不是一个常量，使用强制类型获得写权限是合法的行为，然而如果对象是一个常量属性都将引发编译器错误，同样
+也不能用const_cast改变表达式的类型
+const char *cp; 
+//错误：static_cast不能转换掉const性质
+char *q=static_cast<char*>(cp);
+static_cast<string>(cp);	//正确：字符串字面值转换成string类型
+const_cast<string>(cp);		//错误：const_cast只改变常量属性
+
+reinterpret_cast
+通常为运算对象的位模式提供较低层次上的重新解释
+int *ip;
+char *pc=reinterpret_cast<char*>(ip);
+pc所指的真实对象是一个int而非字符，如果把pc当成普通的字符指针使用就可能在运行时发生错误
+string str(pc);
+可能导致异常的运行时行为
+
+旧式的强制类型转换
+type (expr);	//函数形式的强制类型转换
+(type) expr;	//c语言风格的强制转换
+
+char *pc=(char*) ip;	//ip是指向整数的指针
+
+第五章 语句
+5.1简单语句
+空语句
+;//
+
+//重复读入数据直至到达文件末尾或某次输入的值等于sought
+while(cin>>s&&s!=sought)
+	;//空语句
+别漏写分号，也别多写分号
+！多余的空语句并非总是无害的
+
+复合语句（块）
+while(val<=10){
+	sum+=val;	//把sum+val的值赋给sum
+	++val;
+}
+
+5.2 语句作用域
+可以在if,switch,while,for语句的控制结构内定义变量，定义在控制结构当中的变量只在相应语句的内部可见，一旦语句结束，
+变量也就超出其作用范围了：
+while(int i=get_num())	//每次迭代时创建并初始化i
+	cout<<i<<endl;
+i=0;	//错误：在循环外部无法访问i
+
+如果其他代码也需要访问控制变量，则变量必须定义在语句的外部
+//寻找第一个负值元素
+auto beg=v.begin();
+while(beg!=v.end()&&*beg>=0)
+	++beg;
+if(beg==v.beg())
+	//此时我们知道v中的所有元素都大于等于0
+
+5.3 条件语句
+if语句
+if else语句
+const vector<string> scores={"F","D","C","B","A","A++"};
+//如果grade小于60，对应的字母是F；否则计算其下标
+string lettergrade;
+if(grade<60)
+	lettergrade=score[0];
+else
+	lettergrade=score[(grade-50)/10]
+
+嵌套if语句
+
+5.3.2 switch语句
+//为每个元音字母初始化其计数值
+unsigned aCnt=0,eCnt=0,iCnt=0,oCnt=0,uCnt=0;
+char ch;
+while(cin>>ch){
+	switch(ch){
+		case 'a':
+			++aCnt;
+			break;
+		case 'e':
+			++eCnt;
+			break;
+		case 'i':
+			++iCnt;
+			break;
+		case 'o':
+			++oCnt;
+			break;
+		case 'u':
+			++uCnt;
+			break;
+	}
+}
+
+case标签必须输整型常量表达式
+//统计所有元音字母出现的总次数
+unsigned vowelCnt=0;
+//...
+switch(ch)
+{
+	//出现了a，e，i，o，u中的任意一个都会将vowelCnt的值加1
+	case 'a':
+	case 'e':
+	case 'i':
+	case 'o':
+	case 'u':
+		++vowelCnt;
+		break;
+}
+switch内部的变量定义
+如果在某处一个带有初值的变量位于作用域之外，在另一处该变量位于作用域之内，则从前一处跳转到后一处的行为是非法行为
+case true:
+	//因为程序的执行流程可能绕开下面的初始化语句，所以该switch语句不合法
+	string file_name;	//错误：控制流绕过一个隐式初始化变量
+	int ival=0;		//错误：控制流绕过一个显式初始化的变量
+	int jval;		//正确：因为jval没有初始化
+	break;
+case false:
+	//正确：jval虽然在作用域内，但是它没有被初始化
+	jval=next_num();	//正确：给jval赋一个值
+	if(file_name.empty())	//file_name在作用域内，但是没有被初始化
+！C++中不允许跨过变量的初始化语句直接跳转到该变量作用域内的另一个位置
+
+5.4 迭代语句
+使用while循环
+vector<int> v;
+int i;
+//重复读入数据，直至到达文件末尾或者遇到其他输入问题
+while(cin>>i)
+	v.push_back(i);
+//寻找第一个负值元素
+auto beg=v.begin();
+while (beg!=v.end()&&*beg>=0)
+	++beg;
+if(beg==v.end())
+	//此时v中所有元素都大于等于0
+
+练习5.4.1
+查找连续出现的单词数量
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+int main()
+{
+	string My_string,before_string;
+	vector<string> vec1;//存放每个连续输入的单词
+	vector<int>    vec2;//存放每个连续输入的次数
+	int repeat_number=0;
+	while(cin>>My_string){
+		if(My_string==before_string){
+			++repeat_number;
+		}
+		else{
+			vec2.push_back(repeat_number);
+			repeat_number=1;
+			before_string=My_string;
+			vec1.push_back(My_string);
+		}
+	}
+	vec2.push_back(repeat_number);
+	int a=0;
+	vector<int>::iterator it1=vec2.begin();
+	for(it1;it1!=vec2.end();++it1){
+		if(*it1>a){
+			a=*it1;//找到最大元素
+		}
+	}
+	for(int i=0;i<vec2.size();i++){
+		if(vec2[i]==a){
+			cout<<"单词"<<vec1[i-1]<<"出现的次数为: "<<vec2[i]<<"次"<<endl;
+		}
+	}
+}
+
+5.4.2 传统的for语句
+for语句头中定义的对象只在for循环体内可见，for循环结束后index就不可用了
+
+for语句头中的多重定义
+init-statement可以定义多个对象，但是只能有一条声明语句
+
+5.4.3 范围for语句
+vector<int> v={0,1,2,3,4,5,6,7,8,9};
+for(auto &r:v)	//对于v中的每一个元素
+	r*=2;
+在范围for语句中，预存了end()的值，一旦在序列中添加删除元素，end函数的值就可能变得无效，所以不能用范围for语句增加
+vector对象的元素。
+
+5.4.4 do while语句
+do
+	statement
+while (condition);
+
+5.5 跳转语句
+5.5.1 break语句
+break语句只能出现在迭代语句或者switch语句内部
+5.5.2 continue语句
+终止最近的循环中的当前迭代并立即开始下一次迭代。continue语句只能出现在for，while，do while循环的内部，或者嵌套在此类
+循环里的语句或块的内部
+5.5.3 goto语句
+goto语句的作用是从goto语句无条件跳转到同一函数内的另一条语句
+
+goto label:
+
+带标签语句
+end: return;
+
+goto语句和控制权转向的那条带标签的语句必须位于同一个函数之内。
+goto语句不能将程序的控制权从变量的作用域之外转移到作用域之内。
+//...
+goto end;
+int ix=10;//错误：goto绕过了一个带初始化的变量定义
+end:ix=42;
+
+//向后跳过一个带初始化的变量定义是合法的
+begin:
+	int sz=get_size();
+	if(sz<=0){
+		goto begin;
+	}
+//goto语句执行后将销毁sz，因为跳回到begin的动作跨过了sz的定义语句，所以sz将重新定义并初始化
+
+5.6 try语句块和异常处理
+throw表达式，引发异常
+try语句块，以catch字句结束，处理异常
+一套异常类，用于在throw表达式和相关的catch字句之间传递异常的具体信息
+try{
+	program-statements
+}catch(exception-declaration){
+	handler-statements	
+}catch(exception-declaration){
+	handler-statements	
+}//...
+
+函数在寻找处理代码的过程中退出
+如果没有找到任何匹配的catch子句，程序转到名为terminate的标准库函数，一般情况，执行该函数将导致程序非正常退出
+
+5.6.3 标准异常
+exception 头文件定义了最通用的常见类exception。它只报告异常的发生
+
+stdexcept头文件定义异常类如下
+exception	最常见的问题
+runtime_error 	只有在运行时才能检测出的问题
+range_error  	运行时错误：生成的结果超过了有意义的值域范围
+overflow_error	运行时错误：计算上溢
+underflow_error	运行时错误：计算下溢
+logic_error	程序逻辑错误
+domain_error	逻辑错误：参数对应的结果值不存在
+invalid_argument逻辑错误：无效参数
+length_error	逻辑错误：试图创建一个超出该类型最大长度的对象
+out_of_range	逻辑错误：使用一个超出有效范围的值
+
+new头文件定义了bad_alloc异常类型
+type_info头文件定义了bad_cast异常类型
+
+只能以默认初始化初始化exception，bad_alloc,bad_cast对象，不允许为这些对象提供初始值
+其他类型，使用string和c风格字符串初始化这些类型的对象，不允许使用默认初始化的方式
+
+练习
+#include<iostream>
+#include<stdexcept>
+using namespace std;
+int main()
+{
+    int a,b;
+    cout<<"请输出相处的两个整数：";
+    while(cin>>a>>b){
+        try{
+            if(b==0)throw runtime_error("被除数不能为0");
+            cout<<static_cast<double> (a)/b<<endl;
+        }
+        catch(runtime_error err){//err是runtime_error类的一个实例
+            cout<<err.what();//实例的成员函数，返回内容编译器决定
+            cout<<"\n是否需要重新输入？Enter y or n："<<endl;
+            char c;
+            cin>>c;
+            if(!cin||c=='n')
+                break;
+        }
+    }
+}
+
+第6章 函数
+6.1 函数基础
+5的阶乘
+int fact(int val)
+{
+	int ret=1;
+	while(val>1)
+		ret*=val--;
+	return ret;
+}
+
+函数返回类型
+特殊的返回类型是void
+函数的返回类型不能是数组类型或函数类型，可以是指向数组或函数的指针
+
+6.1.1 
+局部对象
+自动对象：只存在于块执行期间的对象称为自动对象，当块的执行结束后，块中创建的自动对象的值就变成未定义的了
+局部静态变量：在程序的执行路径第一次经过对象定义语句时初始化，并且直到程序终止才被销毁，在此期间即使对象所在的函数结束执行
+也不会对它有影响
+size_t count_calls()
+{
+	static size_t ctr=0;	//调用结束后，这个值仍然有效
+	return ++ctr;
+}
+int main()
+{
+	for(size_t i=0;i!=10;++i)
+		cout<<count_calls()<<endl;
+	return 0;
+}
+
+6.1.2 函数声明
+在头文件中进行函数声明
+建议变量在头文件中声明，在源文件中定义，函数也应如此
+
+6.1.3 分离式编译
+6.2 参数传递
+形参初始化的机理与变量初始化一样
+	引用传递，传引用调用
+	值传递，传值调用
+
+在C++语言中，建议使用引用类型的形参代替指针
+void reset(int *ip)
+{
+	*ip=0;
+	ip=0;
+}
+int i=42;
+reset(&i);	//改变i的值而非i的地址
+cout<<"i = "<<i<<endl;
+
+传引用参数
+void reset(int &i)	//i是传给reset函数的对象的另一个名字
+{
+	i=0;	//改变了i所引对象的值
+}
+int j=42;
+reset(j);	//j采用传引用方式，它的值被改变
+cout<<"j="<<j<<endl;
+
+使用引用避免拷贝
+如果函数无须改变引用形参的值，最好将其声明为常量引用
+//比较两个string对象的长度
+bool isShorter(const string &s1,const string &s2)
+{
+	return s1.size()<s2.size();
+}
+
+使用引用形参返回额外信息
+//返回s中c第一次出现的位置索引
+//引用形参occurs负责统计c出现的总次数
+string::size_type find_char(const string &s,char c,string::size_type &occurs)
+{
+	auto ret=s.size();	//第一次出现的位置（如果有的话）
+	occurs=0;		//设置表示出现次数的形参的值
+	for(decltype(ret) i=0;i!=s.size();++i){
+		if(s[i]==c){
+			if(ret==s.size())
+				ret=i;	//记录c第一次出现的位置
+			++occurs;	//将出现的次数加1
+		}
+	}
+	return ret;		//出现次数通过occurs隐式地返回
+}
+调用find_char函数
+auto index=find_char(s,'o',ctr);
+
+6.2.3 const形参和实参
+const int ci=42;	//不能改变ci,const是顶层的
+int i=ci;		//正确：当拷贝ci时，忽略了它的顶层const
+int *const p=&i;	//const是顶层的，不能给p赋值
+*p=0;			//正确：通过p改变对象的内容是允许的，现在i变成了o
+
+void fcn(const int i){/*fcn能够读取i，但是不能向i写值*/}
+void fcn(int i){}//错误：重复定义了fcn(int)
+
+指针或引用形参与const
+int i=42;
+const int ci=i;
+string::size_type ctr=0;
+reset(&i);		//调用形参类型是int*的reset函数
+reset(&ci);		//错误：不能用指向const int对象的指针初始化int*
+reset(i);		//调用形参类型是int&的reset函数
+reset(ci);		//错误：不能把普通引用绑定到const对象ci上
+reset(42);		//错误：不能把普通引用绑定到字面值上
+reset(ctr);		//错误：类型不匹配，ctr是无符号类型
+//正确：find_char的第一个形参是对常量的引用
+find_char("Hello World!",'o',ctr);
+
+尽量使用常量引用
+//不良设计：第一个形参的类型应该是const string&
+string::size_type find_char(string &s,char c,string::size_type &occurs);
+find_char("Hello World",'o',ctr);//这样的调用将在编译时发生错误
+
+bool is_sentence(const string &s)
+{
+	//如果在s的末尾有且只有一个句号，则s是一个句子
+	string::size_type ctr=0;
+	return find_char(s,'.',ctr)==s.size()-1&&ctr==1;
+}//如果find_char的第一个形参类型是string&，则错误：s是常量引用，但find_char被不正确地定义成只能接受普通引用
+
+6.2.4 数组形参
+数组两个性质：不能拷贝数组，使用数组时通常会转换成指针
+//三个print函数是等价的
+//每个函数都有一个const int*类型的形参
+void print(const int*);
+void print(const int[]);	//可以看出来，函数的意图是作用于一个数组
+void print(const int[10]);	//这里的维度表示我们期望数组含有多少元素，实际不一定
+
+使用标记定义数组长度
+void print(const char *cp)
+{
+	if(cp)	//若cp不是一个空指针
+		while(*cp)	//只要指针所指的字符不是空字符
+			cout<<*cp++;//输出当前字符并将指针向前移动一个位置
+}
+
+使用标准库规范
+void print(const int *beg,const int *end)
+{
+	//输出beg到end（不含end）的所有元素
+	while(beg!=end)
+		cout<<*beg++<<endl;
+}
+int j[2]={0,1};
+print(begin(j),end(j));
+
+显式传递一个表示数组大小的形参
+void print(const int ia[],size_t size)
+{
+	for(size i=0;i!=size;++i){
+		cout<<ia[i]<<endl;
+	}
+}
+int j[]={0,1};
+print(j,end(j)-begin(j));
+
+数组引用形参
+void print(int (&arr)[10])
+{
+	for(auto elem:arr)
+		cout<<elem<<endl;
+}
+int i=0,j[2]={0,1};
+int k[10]={0,1,2,3,4,5,6,7,8,9};
+print(&i);	//错误：实参不是含有10个整数的数组
+print(j);	//错误：实参不是含有10个整数的数组
+print(k);	//正确：实参是含有10个整数的数组
+
+传递多维数组
+void print(int (*matrix)[10],int rowSize){/*...*/}
+//matrix指向数组的首元素，该数组的元素是由10个整数构成的数组
+
+//等价定义
+void print(int matrix[][10],int rowSize){/*...*/}//编译器会忽略掉第一个维度
+
+6.2.5 main:处理命令行选项
+假定main函数位于可执行文件prog之内
+prog -d -o ofile data0;
+通过两个（可选的）形参传递给main函数
+int main(int argc,char *argv[]){...}
+//也可定义为int main(int argc,char **argv){...}
+//argv指向char*
+argv第一个元素指向程序的名字或者一个空字符串，最后一个指针之后的元素值保证为0
+argv[0] = "prog";	//或者argv[0]也可以指向一个空字符串
+argv[1] = "-d";
+argv[2] = "-o";
+argv[3] = "ofile";
+argv[4] = "data0";
+argv[5] = 0;
+当使用argv中的实参时，一定要记得可选的实参从argv[1]开始；argv[0]保存程序的名字，而非用户输入
+
+6.2.6 含有可变形参数的函数
+为了编写能处理不同数量实参的函数，C++11新标准提供了两种主要的方法：如果所有的实参类型相同，
+可传递一个initializer_list的标准库类型，如果实参类型不一样，我们可以编写一种特殊的函数，也就
+是可变参数模板。
+initialize_list形参是一种标准库类型，用于表示某种特定类型的值的数组，定义在同名的头文件中，
+initialize_list提供的操作
+initialize_list<T> lst;//默认初始化:T类型元素的空列表
+initialize_list<T> lst{a,b,c...};//lst的元素数量和初始值一样多；lst的元素是对应初始值的副本；
+列表中的元素是const
+lst2(lst)  lst2=lst//拷贝或赋值一个initializer_list对象不会拷贝列表中的元素;拷贝后，原始列表
+和副本共享元素 
+lst.size() 列表中的元素数量
+lst.begin()返回指向lst中首元素的指针
+lst.end()返回指向lst中尾元素下一位置的指针
+
+initialize_list对象中的元素永远是常量值
+
+使用如下形式编写输出错误信息的函数，使其可以作用于可变数量的实参:
+void error_msg(initializer_list<string> il)
+{
+	for(auto beg=il.begin();beg!=il.end();++beg)
+		cout<<*beg<<" ";
+	cout<<endl;
+}
+如果想向initialize_list形参中传递一个值的序列，必须放在一对花括号内
+//expected和actual是string对象
+if(expected!=actual)
+	error_msg({"functionX",expected,actual});
+else
+	error_msg({"functionX","okay"});
+含有initializer_list形参的函数也可以同时拥有其他参数
+void error_msg(ErrCode e,initializer_list<string> il)
+{
+	cout<<e.msg()<<": ";
+	for(const auto &elem:il)
+		cout<<elem<<" ";
+	cout<<endl;
+}
+
+为了调用这个版本的error_msg函数，需要额外传递一个ErrCode实参
+if(expected!=actual)
+	error_msg(ErrCode(42),{"functionX",expected,actual});
+else
+	error_msg(ErrCode(0),{"functionX","okay"});
+
+省略符形参
+便于C++程序访问某些特殊的C代码而设置的，使用了名为varargs的C标准库功能，
+省略符形参应该仅仅用于C和C++通用的类型，大多数类类型的对象在传递给省略符
+形参时都无法正确拷贝
+省略符只能出现在形参列表的最后一个位置
+void foo(parm_list,...);
+void foo(...);
+
+6.3 返回类型和return语句
+两种形式
+return;
+return expression;
+6.3.1 无返回值函数
+void swap(int &v1,int &v2)
+{
+	//如果两个值是相等的，则不需要交换，直接退出
+	if(v1==v2)
+		return;
+	//如果程序执行到了这里，说明还需要继续完成某些功能
+	int tmp=v2;
+	v2=v1;
+	v1=tmp;
+	//此处无须显式的return语句
+}
+一个返回类型是void的函数也能使用return语句的第二种形式，不过此时return语句的expression必须
+是另一个返回void的函数。强行令void函数返回其他类型的表达式将产生编译错误
+6.3.2 有函数值返回
+在含有return语句的循环后面应该也有一条return语句，如果没有的话该程序就是错误的，很多编译器都
+无法发现此类错误
+
+值是如何被返回的
+返回的值用于初始化调用点的一个临时量，该临时量就是函数调用的结果
+//如果ctr的值大于1，返回word的复数形式；如果不是，返回单词原形：
+//如果ctr的值大于1，返回word的复数形式
+string make_plural(size_t ctr,const string &word,const string &ending)
+{
+	return (ctr>1)?word+ending:word;
+}
+
+//挑出两个string对象中较短的那个，返回其引用
+const string &shorterString(const string &s1,const string &s2)
+{
+	return s1.size()<=s2.size()?s1:s2;
+}
+//其中形参和返回类型都是const string的引用，不管是调用函数还是返回结果都不会真正拷贝string对象
+
+不要返回局部对象的引用或指针
+//严重错误：这两个函数试图返回局部对象的引用
+const string &manip()
+{
+	string ret;
+	//以某种方式改变一下ret
+	if(!ret.empty())
+		return ret;	//错误：返回局部对象的引用
+	else
+		return "Empty";	//错误："Empty"是一个局部临时量
+}
+一旦函数完成，局部对象将被释放，指针将指向一个不存在的对象
+
+返回类类型的函数和调用运算符
+//调用string对象的size成员，该string对象是由shorterString函数返回的
+auto sz=shorterString(s1,s2).size();
+
+引用返回左值
+char &get_val(string &str,string::size_type ix)
+{
+	return str[ix];	//get_val假定索引值是有效的
+}
+int main()
+{
+	string s("a value");
+	cout<<s<<endl;		//输出a value
+	get_val(s,0)='A';	//将s[0]的值改为A
+	cout<<s<<endl;		//输出A value
+	return 0;
+}
+//调用一个返回引用的函数得到左值，其他返回类型得到右值
+
+//如果返回的类型是常量引用，我们不能给调用的结果赋值
+shorterString("hi","bye")="X";//错误：返回值是个常量
+
+列表初始化返回值
+vector<string> process()
+{
+	//...
+	//expected和actual是string对象
+	if(expected.empty())
+		return {};	//返回一个空vector对象
+	else if(expected==actual)
+		return {"functionX","okay"};	//返回列表初始化的vector对象
+	else
+		return {"functionX",expected,actual};
+}
+//如果函数返回的是内置类型，则花括号包围的列表最多包含一个值，而且该值所占空间不应该大于
+目标类型的空间，如果返回的是类类型，则由本身定义初始值如何使用
+
+主函数main的返回值
+cstdlib头文件定义了两个预处理变量，表示成功和失败
+int main()
+{
+	if(some_failure)
+		return EXIT_FAILURE;	//定义在cstdlib头文件中
+	else
+		return EXIT_SUCCESS;	//定义在cstdlib头文件中
+}
+
+递归
+//计算val的阶乘
+int factorial(int val)
+{
+	if(val>1)
+		return factorial(val-1)*val;
+	return 1;
+}
+
+
+main函数不能调用它自己
+
+6.3.3 返回数组指针
+数组不能被拷贝，所以函数不能返回数组，可以返回数组的指针和引用
+typedef int arrT[10];	//arrT是一个类型别名，它表示的类型是含有10个整数的数组
+using arrT=int[10];	//arrT的等价声明
+arrT* func(int i);	//func返回一个指向含有10个整数的数组的指针
+
+声明一个返回数组指针的函数
+int arr[10];	//arr是一个含有10个整数的数组
+int *p1[10];	//p1是一个含有10个指针的数组
+int (*p2)[10]=&arr;	//p2是一个指针，它指向含有10个整数的数组
+定义一个返回数组指针的函数，数组的维度必须跟在函数名字之后
+Type(*function(parameter_list))[dimension]
+
+int (*func(int i))[10];
+解释
+func(int i)表示调用func函数时需要一个int类型的实参
+(*func(int i))意味着我们可以对函数调用的结果执行解引用操作
+(*func(int i))[10]表示解引用func的调用将得到一个大小是10的数组
+int (*func(int i))[10]表示数组中的元素是int类型
+
+使用尾置返回类型
+任何函数的定义都能使用尾置返回
+//func接受一个int类型的实参，返回一个指针，该指针指向含有10个整数的数组
+auto func(int i)->int(*)[10];
+//为了表示函数真正的返回类型跟在形参列表之后，我们在本应该出现返回类型的地方放置一个auto
+
+使用decltype
+如果我们知道函数返回的指针将指向哪个数组，就可以使用decltype关键字声明返回类型
+int odd[]={1,3,5,7,9};
+int even[]={0,2,4,6,8};
+//返回一个指针，该指针指向含有5个整数的数组
+decltype(odd) *arrPtr(int i)
+{
+	return (i%2)?&odd:&even;//返回一个指向数组的指针
+}
+
+6.4 函数重载
+同一作用域内的几个函数名字相同但形参列表不同，称之为重载函数
+void print(const char *cp);
+void print(const int *beg,const int *end);
+void print(const int ia[],size_t size);
+编译器会根据传递的实参类型推断想要的是哪个函数
+main函数不能重载
+
+定义重载函数
+Record lookup(const Account&);	//根据Account查找记录
+Record lookup(const Phone&);	//根据Phone查找记录
+Record lookup(const Name&);	//根据Name查找记录
+Account acct;
+Phone phone;
+Record r1=lookup(acct);		//调用接受Account的版本
+Record r2=lookup(phone);	//调用接受Phone的版本
+不允许两个函数除了返回类型外其他所有的要素都相同。
+Record lookup(const Account &acct);
+bool lookup(const Account&);	//省略了形参的名字
+
+typedef Phone Telno;
+Record lookup(const Phone&);
+Record lookup(const Telno&);//Telno和Phone的类型相同
+
+重载和const形参
+顶层const不影响传入函数的对象，一个拥有顶层const的形参无法和另一个没有顶层的const的形参区分开来
+Record lookup(Phone);
+Record lookup(const Phone);  //重复声明了Record lookup(Phone)
+
+Record lookup(Phone*);     
+Record lookup(Phone* const); //重复声明了Record lookup(Phone*) 
+
+如果形参是某种类型的指针或引用，则通过区分其指向的是常量对象还是非常量对象可以实现函数重载，此时
+的const是底层的
+//对于接受引用或指针的函数来说，对象是常量还是非常量对应的形参不同
+//定义了4个独立的重载函数
+Record lookup(Account&);       //函数作用于指向Account的引用
+Record lookup(const Account&); //新函数，作用于常量引用
+
+Record lookup(Account*);       //新函数，作用于指向Account的指针
+Record lookup(const Account*); //新函数，作用于指向常量的指针
+传递一个非常量对象或指向非常量对象的指针时，编译器会优先选用非常量版本的函数，编译器可以通过是否
+是常量来推断应该调用哪个函数。const不能转换成其他类型，我们只能把const对象（或指向const的指针）传
+递给const形参，相反的，因为非常量可以转换成const，所以上面的4个函数都能作用于非常量对象或者指向非
+常量对象的指针。
+
+const_cast和重载
+//比较两个string对象的长度，返回较短的那个引用
+const string &shorterString(const string &s1,const string &s2)
+{
+	return s2.size()<=s3.size()？s1:s2;
+}
+
+//当实参不是常量时，得到的结果是一个普通引用
+string &shorterString(string &s1,string &s2)
+{
+	auto &r=shorterString(const_cast<const string&>(s1),const_cast<const string&>(s2)),
+	return const_cast<string&>(r);
+}
+
+调用重载的函数
+函数匹配也叫重载确定
+调用重载函数有三种可能结果
+1.最佳匹配（best match）
+2.无匹配（no match）
+3.二义性调用（ambiguous call）
+
+6.4.1 重载与作用域
+!将函数声明置于局部作用域内不是一个明智的选择
+
+在内层作用域中声明名字，它将隐藏外层作用域声明的同名实体，在不同的作用域中无法重载函数名
+string read();
+void print(const string &);
+void print(double);//重载print函数
+void fooBar(int ival)
+{
+	bool read=false;//新作用域：隐藏了外层的read
+	string s=read();//错误：read是一个布尔值，而非函数
+	//不好的习惯：通常来说，在局部作用域中声明函数不是一个好的选择
+	void print(int);//新作用域：隐藏了之前的print
+	print("Value: ");//错误：print(const string &)被隐藏掉了
+	print(ival);	//正确：当前print(int)可见
+	print(3.14);	//正确：调用print(int);print(double)被隐藏掉了
+}
+在C++语言中，名字查找发生在类型检查之前
+
+void print(const string &);
+void print(double);	//print函数的重载形式
+void print(int);	//print函数的另一种重载形式
+void fooBar2(int ival)
+{
+	print("Value: ")'	//调用print(const string &)
+	print(ival);		//调用print(int)
+	print(3.14);		//调用print(double)
+}
+
+6.5 特殊用途语言特性
+6.5.1默认实参
+函数定义如下
+typedef string::size_type sz;
+string screen(sz ht=24,sz wid=80,char backgrnd=' ');
+一旦某个形参被赋予了默认值，它后面的所有形参都必须有默认值
+
+使用默认实参调用函数
+string window;		
+window=screen();		//等价于screen(24,80,' ')
+window=screen(66);		//等价于screen(66,80,' ')
+window=screen(66,256);		//screen(66,256,' ')
+window=screen(66,256,'#');	//screen(66,256,'#')
+
+默认实参负责填补函数调用缺少的尾部实参
+window=screen(, , ,'?');	//错误：只能省略尾部的实参
+window=screen('?');		//调用screen('?',80,' ')
+
+默认实参声明
+在给定的作用域中一个形参只能被赋予一次默认实参，函数的后续声明只能为之前那些没有默认值
+的形参添加默认实参，而且该形参右侧的所有形参必须都有默认值
+//表示高度和宽度的形参没有默认值
+string screen(sz,sz,char=' ');	 //表示高度和宽度的形参没有默认值
+string screen(sz,sz,char='*');	 //错误：重复声明
+string screen(sz=24,sz=80,char); //正确：添加默认实参
+
+默认实参初始值
+局部变量不能作为默认实参
+//wd,def和ht的声明必须出现在函数之外
+sz wd=80;
+char def=' ';
+sz ht();
+string screen(sz=ht(),sz=wd,char =def);
+string window=screen();//调用screen(ht(),80,' ')
+用作默认实参的名字在函数声明所在的作用域内解析，而这些名字的求值过程发生在函数调用时
+void f2()
+{
+	def='*';	//改变默认实参的值
+	sz wd=100;	//隐藏了外层定义的wd，但是没有改变默认值
+	window=screen();//调用screen(ht(),80,'*')
+}
+
+练习6.42
+给make_plural函数第二个形参赋予默认实参‘s’，利用新版本的函数输出单词success和failure的单数和复数形式
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+
+string make_plual(size_t ctr,const string& word,const string& ending="s")
+{
+	return (ctr>1)?word+ending:word;
+}
+int main(int argc,char *argv[])
+{
+	cout<<"两单词的单数形式: "<<make_plural(1,"success","es")<<" "<<make_plural(1,"failure")<<endl;
+	cout<<"两单词的复数形式: "<<make_plural(2,"success","es")<<" "<<make_plural(2,"failure")<<endl;
+	return 0;
+}
+
+6.5.2 内联函数和constexpr函数
+内联函数可以避免函数调用的开销
+将函数指定为内联函数，将它在每个调用点上“内联地”展开
+把shorterString定义成内联函数
+cout<<shorterString(s1,s2)<<endl;
+在编译过程中展开成类似下面
+cout<<(s1.size()<s2.size()?s1:s2)<<endl;
+
+//内联版本：寻找两个string对象中较短的那个
+inline const string &
+shorterString(const string &s1,const string &s2)
+{
+	return s1.size()<=s2.size()?s1:s2;
+}
+
+内联说明只是向编译器发出的一个请求，编译器可以选择忽略这个请求
+用于优化规模较小，流程直接，频繁调用的函数，很多编译器不支持内联递归函数建议不大于75行
+
+constexpr函数
+约定：函数的返回类型及所有形参的类型都得是字面值类型，而且函数体中必须有且只有一条return
+语句
+constexpr int new_sz(){return 42;}
+constexpr int foo=new_sz();  //正确：foo是一个常量表达式
+执行初始化任务时，编译器把对constexpr函数的调用替换成其结果值，为了能在编译过程中随时展开，
+constexpr函数被隐式地指定为内联函数
+constexpr函数体内也可以包含其他语句，只要这些语句在运行时不执行任何操作就行
+允许constexpr函数的返回值并非一个常量
+//如果arg是常量表达式，则scale(arg)也是常量表达式
+constexpr size_t scale(size_t cnt){return new_sz() * cnt;}
+当scale的实参是常量表达式时，它的返回值也是常量表达式；反之则不然
+int arr[scale(2)];	//正确：scale(2)是常量表达式
+int i=2;		//i不是常量表达式
+int a2[scale(i)];	//错误：scale(i)不是常量表达式
+constexpr函数不一定返回常量表达式
+
+把内联函数和constexpr函数放在头文件中
+内联函数和constexpr函数可以在程序中多次定义。对于某个给定的内联函数或者constexpr函数来说，
+它的多个定义必须完全一致
+
+6.5.3 调试帮助
+assert预处理宏
+assert(expr);
+首先对expr求值，为假，assert输出信息并终止程序执行，为真，什么也不做
+assert宏定义在cassert头文件中，预处理名字由预处理器而非编译器管理，可以直接使用无须提供using
+声明
+assert宏常用于检查“不能发生”的条件
+//要求所有给定单词的长度都大于某个阈值
+assert(word.size()>threshold);
+
+NDEBUG预处理变量
+assert的行为依赖于一个名为NDEBUG的预处理变量的状态，如果定义了NDEBUG，则assert什么也不做。
+默认状态下没有定义NDEBUG，此时assert将执行运行时检查
+可以使用#define语句定义NDEBUG，关闭调试状态
+命令行选项定义
+$CC -D NDEBUG main.C # use /D with th Microsoft compiler
+等价于在main.c文件的一开始写#define NDEBUG
+
+NDEBUG编写自己的条件调试代码。如果NDEBUG未定义，将执行#ifndef和
+#endif之间的代码；如果定义了NDEBUG，这些代码将被忽略掉
+void print(const int ia[],size_t size)
+{
+#ifndef NDEBUG
+	//_ _func_ _是编译器定义的一个局部静态变量，用于存放函数的名字
+	cerr<<_ _func_ _<<": array size is "<<size<<endl;
+#endif
+
+除了C++编译器定义的_ _func_ _(是const char的一个静态数组)之外，预处理器
+还定义了另外4个对于程序调试很有用的名字
+_ _FILE_ _存放文件名的字符串字面值
+_ _LINE_ _存放当前行号的整型字面值
+_ _TIME_ _存放文件编译时间的字符串字面值
+_ _DATE_ _存放文件编译日期的字符串字面值
+
+if(word.size()<threshold)
+	cerr<<"Error: "<<_ _FILE_ _
+	    <<" :in function"<<_ _func_ _
+	    <<"at line"<<_ _LINE_ _<<endl
+	    <<"   Compiled on"<<_ _DATE_ _
+	    <<" at "<<_ _TIME_ _<<endl
+	    <<"Word read was \""<<word
+	    <<"\":Length too short"<<endl;
+
+6.6 函数匹配
+void f();
+void f(int);
+void f(int,int);
+void f(double,double =3.14);
+f(5.6);	//调用void f(double,double)
+
+确定候选函数和可行函数
+候选函数：一是与被调用的函数同名，二是其声明在调用点可见
+
+根据调用提供的实参，从候选函数中选出能被这组实参调用的函数，称为可行函数
+可行函数：一是其形参数量与本次调用提供的实参数量相等，二是每个实参的类型与对应的行参类型相同，或者能转换成形参的类型
+
+如果函数含有默认实参，则我们在调用该函数时传入的实参数量可能少于它实际使用的实参数量
+如果没找到可行函数，编译器将报告无匹配函数的错误
+
+含有多个形参的函数匹配
+该函数每个实参的匹配都不劣于其他可行函数需要的匹配
+至少有一个实参的匹配优于其他可行函数提供的匹配
+以上两个条件满足一个则匹配成功
+(42,2.56)匹配(int,int)(double,double),最终二义性拒绝请求
+
+6.6.1 实参类型转换
+为了确定最佳匹配，编译器将实参类型到形参类型的转换划分成几个等级，具体排序如下
+1.精确匹配
+	实参类型和形参类型相同
+	实参从数组类型或函数类型转换成对应的指针类型
+	向实参添加顶层const或者从实参中删除顶层const
+2.通过const转换实现的匹配
+3.通过类型提升实现的匹配
+4.通过算术类型转换或指针转换实现的匹配
+5.通过类类型转换实现的匹配
+
+需要类型提升和算术类型转换的匹配
+void ff(int);
+void ff(short);
+ff('a');	//char提升成int;调用f(int)	
+
+所有算术类型转换的级别都一样。从int向unsigned int的转换并不比从int向double的转换级别高
+void manip(long);
+void manip(float);
+manip(3.14);	//错误：二义性调用
+字面值3.14的类型是double，它既能转换成long也能转换成float。因为存在两种可能的算术类型转换，
+所以该调用具有二义性
+
+函数匹配和const实参
+如果重载函数的区别在于它们的引用类型的形参是否引用了const，或者指针类型的形参是否指向const，
+则当调用发生时编译器通过实参是否是常量来决定选择哪个函数
+Record lookup(Account&);	//函数的形参是Account的引用
+Record lookup(const Account&);	//函数的参数是一个常量引用
+const Account a;
+Account	b;
+
+lookup(a);			//调用lookup(const Account&)
+lookup(b);			//调用lookup(Account&)
+
+6.7 函数指针
+函数指针指向的是函数而非对象
+//比较两个string对象的长度
+bool lengthCompare(const string &,const string &);
+该函数的类型是bool(const string &,const string &),想声明一个可以指向该函数的指针，只需要用指针替换函数名即可
+//pf指向一个函数，该函数的参数是两个const string的引用，返回值是bool类型
+bool (*pf)(const string &,const string &); //未初始化
+*pf两端的括号必不可少。如果不写这对括号，则pf是一个返回值为bool指针的函数
+//声明一个名为pf的函数，该函数返回bool*
+bool *pf(const string &,const string &);
+
+使用函数指针
+当我们把函数名作为一个值使用时，该函数自动地转换成指针
+pf=lengthCompare;//pf指向名为lengthCompare的函数
+pf=&lengthCompare;//等价的赋值语句：取地址符是可选的
+我们可以直接使用指向函数的指针调用该函数，无须提前解引用指针：
+bool b1=pf("hello","goodbye");	//调用lengthCompare函数
+bool b2=(*pf)("hello","goodbye");//一个等价的调用
+bool b3=lengthCompare("hello","goodbye");//另一个等价的调用
+
+在指向不同函数类型的指针间不存在转换规则。我们可以为函数指针赋一个nullptr或者值为0的整型常量表达式，该指针
+没有指向任何一个函数
+string::size_type sumLength(const string&,const string&);
+bool cstringCompare(const string*,const string*);
+pf=0;//正确：pf不指向任何函数
+pf=sumLength;//错误：返回类型不匹配
+pf=cstringCompare;//错误：形参类型不匹配
+pf=lengthCompare;//正确：函数和指针的类型精度匹配
+
+重载函数的指针
+void ff(int*);
+void ff(unsigned int);
+
+void (*pf1)(unsigned int)=ff;	//pf1指向ff(unsigned)
+指针类型必须与重载函数中的某一个精确匹配
+void (*pf2)(int)=ff;	//错误：没有任何一个ff与该形参列表匹配
+double (*pf3)(int*)=ff;	//错误：ff和pf3的返回类型不匹配
+
+函数指针形参
+不能定义函数类型的形参，但是形参可以是指向函数的指针，形参看起来是函数类型，实际上当成指针使用
+//第三个形参是函数类型，它会自动地转换成指向函数的指针
+void useBigger(const string &s1,const string &s2,bool pf(const string &,const string &));
+//等价的声明：显式地将形参定义成指向函数的指针
+void useBigger(const string &s1,const string &s2,bool (*pf)(const string &,const string &));
+
+可以直接把函数作为实参使用，它会自动转换成指针
+//自动将函数lengthCompare转换成指向该函数的指针
+useBigger(s1,s2,lengthCompare)
+
+简化使用函数指针
+//Func和Func2是函数类型
+typedef bool Func(const string&,const string&);
+typedef decltype(lengthCompare) Func2;//等价的类型
+//FuncP和FuncP2是指向函数的指针
+typedef bool (*FuncP)(const string&,const string&);
+typedef decltype(lengthCompare) *FuncP2;//等价的类型
+注意：decltype返回函数类型，不会将函数类型自动转换成指针类型，在前面加*才能得到指针
+//useBigger的等价声明，其中使用了类型别名
+void useBigger(const string&,const string&,Func);
+void useBigger(const string&,const string&,FuncP2);
+
+返回指向函数的指针
+不能返回一个函数，但是可以返回指向函数类型的指针，我们必须把返回类型写成指针形式，编译器不会自动地将函数返回
+类型当成对应的指针类型处理
+using F=int(int*,int);	//F是函数类型，不是指针
+using PF=int (*)(int*,int);//PF是指针类型
+必须显示地将返回类型指定为指针：
+PF f1(int);		//正确：PF是指向函数的指针，f1返回指向函数的指针
+F f1(int);		//错误：F是函数类型，f1不能返回一个函数
+F *f1(int);		//正确：显示地指定返回类型是指向函数的指针
+int (*f1(int))(int*,int);
+由内到外阅读：f1是个函数，f1前面有*，所以f1返回一个指针，返回的指针指向函数，该函数返回类型是int
+auto f1(int)->int (*)(int*,int);
+
+将auto和decltype用于函数指针类型
+string::size_type sumLength(const string&,const string&);
+string::size_type largerLength(const string&,const string&);
+//根据其形参的取值，getFcn函数返回指向sumLength或者largerLength的指针
+decltype(sumLength) *getFcn(const string &);
+将decltype作用于某个函数时，它返回函数类型而非指针类型，显式加上*表明我们需要返回指针，而非函数本身
+
+练习 6.54
+编写函数声明，令其接受两个int形参并且返回类型也是int，然后声明一个vector对象，令其元素是指向该函数的指针
+typedef int (*p)(int a,int b);
+vector<p> a;
+
+第7章 类
+类的基本思想是数据抽象和封装。数据抽象是一种依赖于接口和实现分离的变成（以及设计）技术
+7.1 定义抽象数据类型
+7.1.1 设计Sales_data类
+接口应该包含以下操作：
+	一个isbn成员函数，用于返回对象的ISBN编号
+	一个combine成员函数，用于将一个Sales_data对象加到另一个对象上
+	一个名为add的函数，执行两个Sales_data对象的加法
+	一个read函数,将数据从istream读入到Sales_data对象中
+	一个print函数，将Sales_data对象的值输出到ostream
+
+使用改进的Sales_data类
+Sales_data total;		//保存当前求和结果的变量
+if(read(cin,total)){		//读入第一笔交易
+	Sales_data trans;	//保存下一条交易数据的变量
+	while(read(cin,trans)){ //读入剩余的交易
+		if(total.isbn()==trans.isbn())	//检查isbn
+			total.combine(trans);	//更新变量total当前的值
+		else{
+			print(cout,total)<<endl;
+			total=trans; 		//处理下一本书
+		}
+	}
+	print(cout,total)<<endl;		//输出最后一条交易
+}else{						//没有输入任何信息
+	cerr<<"No data?!"<<endl;		//通知用户
+}
+
+7.1.2 定义改进的Sales_data类
+struct Sales_data{
+	//新成员:关于Sales_data对象的操作
+	std::string isbn() const {return bookNo;}
+	Sales_data& combine(const Sales_data&);
+	double avg_price() const;
+	std::string bookNo;
+	unsigned units_sold=0;
+	double revenue=0.0;
+};
+//Sales_data的非成员接口函数
+Sales_data add(const Sales_data&,const Sales_data&);
+std::ostream &print(std::ostream&,const Sales_data&);
+std::istream &read(std::istream&,Sales_data&);
+
+定义在类内部的函数是隐式的inline函数
+
+定义成员函数
+std::string isbn() const {return bookNo;}
+引入this
+total.isbn()
+当isbn返回bookNo时，实际上它隐式地返回total.bookNo
+隐式参数this
+调用total.isbn()成员函数时，用请求该函数的对象地址初始化this，把total的地址传递给
+isbn的隐式形参this，等价认为编译器将该调用重写成了如下
+//伪代码，用于说明调用成员函数的实际执行过程
+Sales_data::isbn(&total)
+当isbn使用bookNo时，它隐式地使用this指向的成员，就像我们书写了this->bookNo一样
+在函数体内部可以使用this
+std::string isbn() const{return this->bookNo}
+this是一个常量指针
+
+引入const成员函数
+const的作用是修改隐式this指针的类型
+默认情况下，this的类型是指向类类型非常量版本的常量指针，我们不能把this绑定到一个常量对象上，
+我们不能在一个常量对象上调用普通的成员函数
+像上面使用const的成员函数被称作常量成员函数
+
+把isbn的函数体想象成如下的形式：
+//伪代码，说明隐式的this指针是如何使用的
+//下面的代码是非法的：因为我们不能显示地定义自己的this函数
+//谨记此处的this是一个指向常量的指针，因为isbn是一个常量成员
+std::string Sales_data::isbn(const Sales_data *const this)
+{return this->isbn;}
+
+常量函数，以及常量对象的引用或指针都只能调用常量成员函数
+
+类作用域和成员函数
+成员函数体可以随意使用类中的其他成员而无须在意这些成员出现的次序
+在类的外部定义成员函数
+成员函数的定义必须与它的声明匹配，如果成员被声明成常量成员函数，那它的定义也必须在参数列表后
+明确指定const属性。同时，类外部定义的成员的名字必须包含它所属的类名：
+double Sales_data::avg_price() const{
+	if(units_sold)
+		return revenue/units_sold;
+	else
+		return 0;
+}
+函数名Sales_data::avg_price使用作用域来说明如下的事实：我们定义了一个avg_price的函数，并且该
+函数被声明在类Sales_data的作用域内
+
+定义一个返回this对象的函数
+Sales_data& Sales_data::combine(const Sales_data &rhs)
+{
+	units_sold+=rhs.units_sold;	//把rhs的成员加到this对象的成员上
+	revenue+=rhs.revenue;
+	return *this;			//返回调用该函数的对象
+}
+
+total.combine(trans);		//更新变量total当前的值
+total的地址被绑定到隐式的this参数上，而rhs绑定到了trans上，因此，当combine执行下面的语句
+units_sold+=rhs.units_sold;
+等同于求total.units_sold和trans.unit_sold的和，然后把结果保存到total.units_sold中
+
+7.1.3 定义类相关的非成员函数
+一般来说，如果非成员函数是类接口的组成部分，则这些函数的声明应该与类在同一个头文件内
+
+定义read和print函数
+//输入的交易信息包括ISBN，售出总数和售出价格
+istream& read(istream &is,Sales_data &item)
+{
+	double price=0;
+	is>>item.bookNo>>item.units_sold>>price;
+	item.revenue=price*item.units_sold;
+	return is;
+}
+ostream& print(ostream &os,const Sales_data &item)
+{
+	os<<item.isbn()<<" "<<item.units_sold<<" "
+	  <<item.revenue<<" "<<item.avg_price();
+	return os;
+}
+read函数从给定流中将数据读到给定的对象里，print函数则负责将给定的对象的内容打印到给定的流中
+
+定义add函数
+Sales_data add(const Sales_data &lhs,const Sales_data &rhs)
+{
+	Sales_data sum=lhs;	//把lhs的数据成员拷贝给sum
+	sum.combine(rhs);	//把rhs的数据加到sum当中
+	return sum;
+}
+
+7.1.4 构造函数
+构造函数的任务是初始化类对象的数据成员，只要类的对象被创建，就会执行构造函数
+名字和类名相同，构造函数没有返回类型
+构造函数不能被声明成const，当创建类的一个const对象，直到构造函数完成初始化过程，
+对象才真正取得其“常量”属性，构造函数在const对象的构造过程中可以向其写值
+
+合成的默认构造函数
+Sales_data total;	//保存当前求和结果的变量
+Sales_data trans;	//保存下一条交易数据的变量
+按照如下规则初始化类的数据成员：
+如果存在类内的初始值，用它来初始化成员
+否则默认初始化该成员
+
+某些类不能依赖于合成的默认构造函数
+只有当类没有声明任何构造函数时，编译器才会自动地生成默认的构造函数
+如果类包含有内置类型或者符合类型的成员，则只有当这些成员全被赋予了类内的初始值
+时，这个类才适合于使用合成的默认构造函数
+有的时候编译器不能为某些类合成默认的构造函数
+
+定义Sales_data的构造函数
+struct Sales_data{
+	//新增的构造函数
+	Sales_data()=default;
+	Sales_data(const std::string &s):bookNo(s){}
+	Sales_data(const std::string &s,unsigned n,double p):
+		   bookNo(s),units_sold(n),revenue(p*n){}
+	Sales_data(std::istream &);
+	//之前已有的其他成员
+	std::string isbn() const{return bookNo;}
+	Sales_data& combine(const Sales_data&);
+	double avg_price() const;
+	std::string bookNo;
+	unsigned units_sold=0;
+	double revenue=0.0;
+}
+
+=default的含义
+要求编译器生成构造函数，=default在类的内部，默认构造函数是内联，在类的外部，不是内联
+
+之所以上述默认构造函数对Sales_data有效，因为内置类型的数据成员提供了初始值，如果编译器不支持类内初始化，
+默认构造函数应该使用构造函数初始值列表来初始化类的每个成员
+
+构造函数初始化列表
+Sales_data(const std::string &s):bookNo(s){}
+Sales_data(const std::string &s,unsigned n,double p):bookNo(s),units_sold(n),revenue(p*n){}
+当某个数据成员被构造函数初始值列表忽略时，它将以与合成默认构造函数相同的方式隐式初始化，在此例中，这样的
+成员使用类内初始值初始化，接受一个string参数的构造函数等价于
+//与上面定义的那个构造函数效果相同
+Sales_data(const std::string &s):bookNo(s),units_sold(0),revenue(0){}
+
+构造函数不应该轻易覆盖掉类内的初始值，除非新赋的值与原值不同。如果你不能使用类内的初始值，则所有构造函数
+都应该显式地初始化每个内置类型成员
+
+在类的外部定义构造函数
+以istream为参数的构造函数需要执行一些实际的操作，在它的函数体内，调用了read函数以给数据成员赋以初值：
+Sales_data::Sales_data(std::istream &is)
+{
+	read(is,*this);	//read函数的作用是从is中读取一条交易信息然后
+			//存入this对象中
+}
+
+7.1.5 拷贝，赋值和析构
+不主动定义这些操作，编译器将替我们合成它们
+total=trans;//处理下一本书的信息
+上面一句与下面的代码相同
+//Sales_data的默认赋值操作等价于
+total.bookNo=trans.bookNo;
+total.units_sold=trans.units_sold;
+total.revenue=trans.revenue;
+
+某些类不能依赖于合成的版本
+例如当类需要分配类对象之外的资源时，合成的版本常常会失效
+如果类包含vector或string对象，则其拷贝，赋值和销毁的合成版本能够正常工作
+
+7.2 访问控制与封装
+使用访问说明符加强类的封装性
+定义在public说明符之后的成员在整个程序内可被访问，public成员定义类的接口
+定义在private说明符之后的成员可以被类的成员函数访问，但是不能被使用该类的代码
+访问，private部分封装了(即隐藏了)类的实现细节
+
+class Sales_data{
+public:
+	Sales_data()=default;
+	Sales_data(const std::string &s,unsigned n,double p):
+		bookNo(s),units_sold(n),revenue(p*n){}
+	Sales_data(const std::string &s):bookNo(s){}
+	Sales_data(std::istream&);
+	std::string isbn() const{return bookNo;}
+	Sales_data &combine(const Sales_data&);
+private:	
+	double avg_price() const
+		{return units_sold?revenue/units_sold:0;}
+	std::string bookNo;
+	unsigned units_sold=0;
+	double revenue=0.0;
+};
+
+使用class或struct关键字
+两种方式仅仅是形式上有所不同，区别是默认访问权限不太一样
+类可以在它的第一个访问说明符之前定义成员，对这种成员的访问权限依赖于类定义的方式。
+如果使用struct关键字，则定义在第一个访问说明符之前的成员是public，相反使用class，这些成员是private
+
+7.2.1 友元
+类可以允许其他类或者函数访问它的非公有成员，方法是令其他类或者函数称为它的友元，加一条friend关键字开始函数声明语句
+class Sales_data{
+//为Sales_data的非成员函数所做的友元声明
+friend Sales_data add(const Sales_data&,const Sales_data&);
+friend std::istream &read(std::istream&,Sales_data&);
+friend std::ostream &print(std::ostream&,const Sales_data&);
+public:
+	Sales_data()=default;
+	Sales_data(const std::string &s,unsigned n,double p):
+		bookNo(s),units_sold(n),revenue(p*n){}
+	Sales_data(const std::string &s):bookNo(s){}
+	Sales_data(std::istream&);
+	std::string isbn() const{return bookNo;}
+	Sales_data &combine(const Sales_data&);
+private:	
+	double avg_price() const
+		{return units_sold?revenue/units_sold:0;}
+	std::string bookNo;
+	unsigned units_sold=0;
+	double revenue=0.0;
+};
+//Sales_data接口的非成员组成部分的声明
+Sales_data add(const Sales_data&,const Sales_data&);
+std::istream &read(std::istream&,Sales_data&);
+std::ostream &print(std::ostream&,const Sales_data&);
+友元不是类的成员也不受它所在区域访问控制级别的约束
+一般来说，最好在类定义开始或结束前的位置集中声明友元
+
+封装的益处：
+确保用户代码不会无意间破坏封装对象的状态
+被封装的类的具体实现细节可以随时改变，而无须调整用户级别的代码
+
+友元的声明
+友元的声明仅仅指定了访问的权限，而非一个通常意义上的函数声明。如果我们希望类的用户能够调用某个友元函数，
+那么我们就必须在友元声明之外再专门对函数进行一次声明
+为了使友元对类的用户可见，我们通常把友元的声明与类的本身放置在同一个头文件中（类的外部）。
+许多编译器并未强制限定友元函数必须在使用之前在类的外部声明，有的编译器就不行，所以还是有个独立的声明好
+
+7.3 类的其他特性
+7.3.1 类成员再探
+互相关联的类，Screen和Window_mgr
+定义一个类型成员
+class Screen{
+public:
+	typedef std::string::size_type pos;
+//等价	using pos=std::string::size_type;	
+private:
+	pos cursor=0;
+	pos height=0,width=0;
+	std::string contents;
+}
+定义类型的成员必须先定义后使用，这一点与普通成员有所区别，类型成员通常出现在类开始的地方
+
+Screen类的成员函数
+class Screen{
+public:
+	typedef std::string::size_type pos;
+	Screen()=default;//因为Screen有另一个构造函数，所以本函数是必须的
+	//cursor被其类内初始值初始化为0	
+	Screen(pos ht,pos wd,char c):height(ht),width(wd),contents(ht*wd,c){}
+	char get() const 		//读取光标处的字符
+		{return contents[cursor];}//隐式内联
+	inline char get(pos ht,pos wd) const;//显式内联
+	Screen &move(pos r,pos c);        //能在之后被设为内联
+private:
+	pos cursor=0;
+	pos height=0,width=0;
+	std::string contents;
+}
+
+令成员作为内联函数
+我们可以在类的内部把inline作为声明的一部分显示地声明成员函数，也能在类的外部用inline关键字修饰函数的定义
+inline
+Screen &Screen::move(pos r,pos c)
+{
+	pos row=r*width;	//计算行的位置
+	cursor=row+c;		//在行内将光标移动到指定的列
+	return *this;		//以左值的形式返回对象
+}
+char Screen::get(pos r,pos c) const //在类的内部声明成inline
+{
+	pos row=r*width;	//计算行的位置
+	return contents[row+c];	//返回给定列的字符
+}
+
+重载成员函数
+Screen myscreen;
+char ch=myscreen.get();		//调用Screen::get()
+ch=myscreen.get(0,0);		//调用Screen::get(pos,pos)
+
+可变数据成员
+可变数据成员永远不会是const，即使它是const对象的成员，关键字mutable
+给Screen添加一个名为access_ctr的可变成员，通过它我们可以追踪每个Screen的成员函数被调用了多少次
+class Screen{
+public:
+	void some_member() const;
+private:
+	mutable size_t access_ctr;	//即使在一个const对象内也能被修改
+}
+void Screen::some_member() const
+{
+	++access_ctr; 			//保存一个计数值，用于记录成员函数被调用的次数
+	//该成员需要完成的其他工作
+}
+
+类数据成员的初始值
+窗口管理类表示表示显示器上的一组Screen
+class Window_mgr{
+private:
+	//这个Window_mgr追踪的Screen
+	//默认情况下，一个Window_mgr包含一个标准尺寸的空白Screen
+	std::vector<Screen> screens{Screen(24,80,' ')}
+}
+类内初始值必须使用=的初始化形式或者花括号括起来的直接初始化形式
+7.3.2 返回*this的成员函数
+class Screen{
+public:
+	Screen &set(char);
+	Screen &set(pos,pos,char);
+	//其他成员和之前的版本一致
+}
+inline Screen &Screen::set(char c)
+{
+	contents[cursor]=c;	//设置当前光标所在位置的新值
+	return *this;	
+}
+inline Screen &Screen::set(por r,pos col,char ch)
+{
+	contents[r*width+col]=ch;	//设置给定位置的新值
+	return *this;
+}
+
+//把光标移动到一个指定的位置，然后设置该位置的字符值
+myScreen.move(4,0).set('#');
+如果我们令move和set返回Screen而非Screen&,返回的是*this的副本,不能改变myScreen的值，等价于
+Screen temp=myScreen.move(4,0);//对返回值进行拷贝
+temp.set('#');		       //不会改变myScreen的contents
+
+从const成员函数返回*this
+令display为一个const成员
+Screen myScreen;
+//如果display返回常量引用，则调用set将引发错误
+myScreen.display(cout).set('*');
+即使myScreen是个非常量对象，对set的调用也无法通过编译，问题在于display的const版本返回的是常量引用，
+我们无权set一个常量对象
+
+一个const成员函数如果以引用的形式返回*this,那么它的返回类型将是常量引用
+
+基于const的重载
+class Screen{
+public:
+	//根据对象是否是const重载了display函数
+	Screen &display(std::ostream &os)
+			{do_display(os);return *this;}
+	const Screen &display(std::ostream &os) const
+			{do_display(os);return *this;}
+private:
+	//该函数负责显示Screen的内容
+	void do_display(std::ostream &os) const{os<<contents;}
+}
+
+Screen myScreen(5,3);
+const Screen blank(5,3);
+myScreen.set('#').display(cout);	//调用非常量版本
+blank.display(cout);			//调用常量版本
+
+7.3.3 类类型
+struct First{
+	int memi;
+	int getMem;
+};
+struct Second{
+	int memi;
+	int getMem;
+};
+First obj1;
+Second obj2=obj1;	//错误：obj1和obj2的类型不同
+即使两个类的成员列表完全一致，它们也是不同的类型，对于一个类来说，它的成员和其他任何类的成员都不是一回事
+Sales_data item1;	//默认初始化Sales_data类型的对象
+class Sales_data item1; //一条等价的声明
+
+类的声明
+class Screen;		//Screen类的声明
+这种声明有时被称作前向声明，在它声明之后定义之前是一个不完全类型
+不完全类型只能在有限的情境下使用：可以定义指向这种类型的指针或引用，也可以声明（不能定义）以不完全类型作为
+参数或者返回类型的函数
+对于一个类来说创建它对象之前必须被定义过，而不能仅仅被声明，有一种例外:直到类被定义之后数据成员才能被声明成
+这种类类型
+只有当类全部完成后类才算被定义，一个类的成员类型不能是该类自己，一旦一个类的名字出现后，它就被认为是声明过了
+（但尚未定义），因此类允许包含指向它自身类型的引用或指针
+class Link_screen{
+	Screen window;
+	Link_screen *next;
+	Link_screen *prev;
+}
+
+练习7.31：定义一对类X和Y，其中X包含一个指向Y的指针，而Y包含一个类型为X的对象
+class Y;
+class X{
+	Y* y=nullptr;
+};
+class Y{
+	X x;
+};
+
+7.3.4 友元再探
+类之间的友元关系
+class Screen{
+	friend class Window_mgr;
+};
+class Window_mgr{
+public:
+	//窗口中每个屏幕的编号
+	using ScreenIndex=std::vector<Screen>::size_type;
+	//按照编号将指定的Screen重置为空白
+	void clear(ScreenIndex);
+private:
+	std::vector<Screen> screens{Screen(24,80,' ')};
+};
+void Window_mgr::clear(ScreenIndex i)
+{
+	//s是一个Screen的引用，指向我们想清空的那个屏幕
+	Screen &s=screens[i];
+	//将那个选定的Screen重置为空白
+	s.contents=string(s.height*s.width,' ');
+}
+友元关系不存在传递性，Window_mgr有它自己的友元，这些友元不能理所当然地具有访问Screen的特权
+每个类负责控制自己的友元类或友元函数
+
+令成员函数作为友元
+class Screen{
+	//Window_mgr::clear必须在Screen类之前被声明
+	friend void Window_mgr::clear(ScreenIndex);
+	//Screen类的剩余部分
+}
+
+函数重载和友元
+如果一个类想把一组重载函数声明成它的友元，需要对这组函数中的每一个分别声明：
+//重载的storeOn函数
+extern std::ostream& storeOn(std::ostream &,Screen &);
+extern BitMap& storeOn(BitMap &,Screen &);
+class Screen{
+	//storeOn的ostream版本能访问Screen对象的私有部分
+	friend std::ostream& storeOn(std::ostream &,Screen &);
+}
+Screen类把接受ostream&的storeOn函数声明成它的友元，但是接受BitMap&作为参数的版本仍然不能访问Screen
+
+友元声明和作用域
+类和非成员函数的声明不是必须在它们的友元声明之前，当一个名字第一次出现在一个友元声明中时，我们隐式
+地假定该名字在当前作用域中是可见的，然而友元本身不一定真的声明在当前作用域中
+甚至就算在类的内部定义该函数，我们也必须在类的外部提供相应的声明从而使得函数可见
+struct X{
+	friend void f(){/*友元函数可以定义在类的内部*/}
+	X(){f();}	//错误：f还没有被声明
+	void g();
+	void h();
+};
+void X::g() {return f();}	//错误：f还没有被声明
+void f();			//声明那个定义在X中的函数
+void X::h() {return f();}	//正确：现在f的声明在作用域中了
+有的编译器并不强制执行上述关于友元的限定规则
+
+练习7.32：定义你自己的Screen和Window_mgr,其中clear是Window_mgr的成员，是Screen的友元
+#include <vector>
+#include <string>
+#include <iostream>
+
+class Screen;
+
+class Window_mgr{
+public:
+	//窗口中每个屏幕的编号
+	using ScreenIndex=std::vector<Screen>::size_type;
+	//按照编号将指定的Screen重置为空白
+	inline void clear(ScreenIndex);
+private:
+	std::vector<Screen> screens{Screen(24,80,' ')};
+};
+
+class Screen{
+	friend void Window_mgr::clear(ScreenIndex);
+public:
+	using pos=std::string::size_type;
+
+	Screen()=default; //1
+	Screen(pos ht,pos wd):height(ht),width(wd),contents(ht*wd,' '){} //2
+	Screen(pos ht,pos wd,char c):height(ht),width(wd),contents(ht*wd,c){}//3
+
+	char get() const{return contents[cursor];}
+	char get(pos r,pos c)const {return contents[r*width+c];}
+	inline Screen& move(pos r,pos c);
+	inline Screen& set(char c);
+	inline Screen& set(pos r,pos c,char ch);
+	const Screen& display(std::ostream &os) const {do_display(os);return *this;}
+	Screen& display(std::ostream &os){do_display(os);return *this;}
+	
+private:
+	void do_display(std::ostream &os) const {os<<contents;}
+	pos cursor=0;
+	pos height=0,width=0;
+	std::string contents;
+}
+
+inline void Window_mgr::clear(ScreenIndex i)
+{
+	if(i>=screens.size()) return;
+	//s是一个Screen的引用，指向我们想清空的那个屏幕
+	Screen &s=screens[i];
+	//将那个选定的Screen重置为空白
+	s.contents=std::string(s.height*s.width,' ');
+}
+
+inline Screen& Screen::move(pos r,pos c)
+{
+	cursor=r*width+c;
+	return *this;
+}
+
+inline Screen& Screen::set(char c)
+{
+	contents[cursor]=c;	//设置当前光标所在位置的新值
+	return *this;	
+}
+
+inline Screen& Screen::set(por r,pos col,char ch)
+{
+	contents[r*width+col]=ch;	//设置给定位置的新值
+	return *this;
+}
+
+7.4 类的作用域
+作用域和定义在类外部的成员
+一个类就是一个作用域
+一旦遇到了类名，定义的剩余部分就在类的作用域之内了，这里的剩余部分包括参数列表
+和函数体。我们可以直接使用类的其他成员而无须再次授权了
+函数的返回类型通常出现在函数名之前，因此当成员函数定义在类的外部时，返回类型中
+使用的名字都位于类的作用域之外，返回类型必须指明它是哪个类的成员
+class Window_mgr{
+public:
+	//当窗口添加一个Screen，返回它的编号
+	ScreenIndex addScreen(const Screen&);
+	//其他成员与之前的版本一致
+};
+//首先处理返回类型，之后我们才进入Window_mgr的作用域
+Window_mgr::ScreenIndex 
+Window_mgr::addScreen(const Screen &s)
+{
+	screens.push_back(s);
+	return screens.size()-1;
+}
+
+7.4.1 名字查找与类的作用域
+
+首先，在名字所在的块中寻找其声明语句，只考虑在名字的使用之前出现的声明。
+如果没找到，继续寻找外层作用域。
+如果最终没有找到匹配的声明，则程序报错。
+
+编译器处理完类中的全部声明后才会处理成员函数的定义
+
+！用于类成员声明的名字查找
+若果某个成员的声明使用了类中尚未出现的名字，则编译器将会在定义该类的作用域中继续查找
+typedef double Money;
+string bal;
+class Account{
+public:
+	Money balance(){return bal;}
+private:
+	Money bal;
+	//...
+};
+编译器看到balance函数的声明语句，它将在Account类的范围内寻找对Money的声明。编译器只考虑Account
+中在使用Money前出现的声明，因为没找到匹配的成员，所以编译器会接着到Account的外层作用域中查找。
+balance函数体在整个类可见后才被处理，该函数的return语句返回名为bal的成员，而非外层作用域的string对象。
+
+！类型名要特殊处理
+一般来说，内层作用域可以重新定义外层作用域的名字，即使该名字已经在内层作用域中使用过，然而在类中，如果
+成员使用了外层作用域中的某个名字，而该名字代表一种类型，则类不能在之后重新定义该名字
+typedef double Money;
+class Account{
+public:
+	Money balance(){return bal;}//使用外层作用域的Money
+private:
+	typedef double Money;       //错误：不能重新定义Money
+	Money bal;
+	//...
+};
+即使Account中定义的Money类型与外层作用域一致，上述代码仍然是错误的
+！类型名的定义通常出现在类的开始处，这样就能确保所有使用该类型的成员都出现在类名的定义之后
+
+！成员定义中的普通块作用域的名字查找
+成员函数中使用得名字按照如下方式解析：
+首先，在成员函数内查找该名字的声明，如果在成员函数内没找到，则在类内继续查找，这时类的所有
+成员都可以被考虑。如果类内也没找到该名字的声明，在成员函数定义之前的作用域内继续查找
+
+int height; //定义了一个名字，稍后将在Screen中使用
+class Screen{
+public:
+	typedef std::string::size_type pos;
+	void dummy_fcn(pos height){
+		cursor = width*height;	//哪个height?是那个参数
+	}
+private:
+	pos cursor=0;
+	pos height=0,width=0;
+};
+当编译器处理dummy_fcn中的乘法表达式时，它首先在函数作用域内查找表达式中用到的名字。
+height参数隐藏了同名的成员。想绕开查找规则，如下
+void Screen::dummy_fcn(pos height){
+	cursor=width*this->height;	//成员height
+	//另外一种表示该成员的方式
+	cursor=width*Screen::height;	//成员height
+}
+//建议的写法：不要把成员名字作为参数或其他局部变量使用
+void Screen::dummy_fcn(pos ht){
+	cursor=width*height;//成员height
+}
+
+类作用域之后，在外围的作用域中查找
+如果编译器在函数和类的作用域中都没有找到名字，它将接着在外围的作用域中查找。
+//显式地通过作用域中可能被用到的名字
+void Screen::dummy_fcn(pos height){
+	cursor=width*::height;//哪个height?是那个全局的
+}
+尽管外层的对象被隐藏掉了，但我们仍然可以用作用域运算符访问它
+
+在文件中名字的出现处对其进行解析
+当成员定义在类的外部时，名字查找的第三部不仅要考虑类定义之前的全局作用域中的声明，还需要考虑
+在成员函数定义之前的全局作用域中的声明
+int height;	//定义了一个名字，稍后将在Screen中使用
+class Screen{
+public:
+	typedef std::string::size_type pos;
+	void setHeight(pos);
+	pos height=0;	//隐藏了外层作用域中的height
+};
+Screen::pos verify(Screen::pos);
+void Screen::setHeight(pos var){
+	//var:参数
+	//height:类的成员
+	//verify:全局函数
+	height=verify(var);
+}
+全局函数verify的声明在Screen类的定义之前是不可见的
+
+7.5 构造函数再探
+7.5.1 构造函数初始值列表
+//Sales_data构造函数的一种写法，虽然合法但比较草率：没有使用构造函数初始值
+Sales_data::Sales_data(const string &s,unsigned cnt,double price)
+{
+	bookNo=s;
+	units_sold=cnt;
+	revenue=cnt*price;
+}
+//这个版本是赋值操作，原来版本是初始化数据成员
+
+构造函数的初始值有时必不可少
+当成员属于某种类类型且该类没有定义默认构造函数时，也必须将这个成员初始化：
+class ConstRef{
+public:
+	ConstRef(int ii);
+private:
+	int i;
+	const int ci;
+	int &ri;
+}
+成员ci和ri都必须被初始化，没有提供构造函数初始值将引发错误
+//错误:ci和ri必须被初始化
+ConstRef::ConstRef(int ii)
+{//赋值
+	i=ii;	//正确
+	ci=ii;	//错误：不能给const赋值
+	ri=i;	//错误：ri没被初始化
+}
+
+//正确：显式地初始化引用和consr成员
+ConstRef::ConstRef(int ii):i(ii),ci(ii),ri(i){}
+如果成员是const，引用，或者属于某种未提供默认构造函数的类类型，我们必须通过构造函数初始值列表为这些成员提供初始值
+！建议使用构造函数初始值
+
+成员初始化顺序
+构造函数初始值列表只说明用于初始化成员的值，而不限定初始化的具体执行顺序
+
+class X{
+	int i;
+	int j;
+public:
+	//未定义的：i在j之前被初始化
+	X(int val):j(val),i(j){}
+}
+//实际上i先被初始化
+//最好改成 X(int val):j(val),i(val){}
+！最好令构造函数初始值的顺序与成员声明的顺序保持一致。而且如果可能的话，尽量避免使用某些成员初始化其他成员
+
+默认实参和构造函数
+class Sales_data{
+public:
+	//定义默认构造函数，令其与只接受一个string实参的构造函数功能相同
+	Sales_data(std::string s = ""):bookNo(s){}
+	//其他构造函数与之前一致
+	Sales_data(std::string s,unsigned cnt,double rev):bookNo(s),units_sold(cnt),revenue(rev*cnt){}
+	Sales_data(std::istream &is){read(is,*this);}
+	//其他成员与之前的版本一致
+}
+
+如果一个构造函数为所有参数都提供了默认实参，则它实际上也定义了默认构造函数
+
+练习 7.38
+提供cin作为接受istream&参数的构造函数的默认实参
+Sales_data(std::istream &is=std::cin){read(is,*this);}//将默认实参直接赋予变量即可
+
+7.5.2 委托构造函数
+class Sales_data{
+public:
+	//非委托构造函数使用对应的实参初始化成员
+	Sales_data(std::string s,unsigned cnt,double price):
+		bookNo(s),units_sold(cnt),revenue(cnt*price){}
+	//其余构造函数全部委托给另一个构造函数
+	Sales_data():Sales_data("",0,0){}
+	Sales_data(std::string s):Sales_data(s,0,0){}
+	Sales_data(std::istream &is):Sales_data()
+					{read(is,*this);}
+	//其他成员与之前的版本一致
+}
+当一个构造函数委托给另一个构造函数时，受委托的构造函数的初始值列表和函数体被依次执行。假如受委托的函数体
+包含有代码的话，将先执行这些代码，然后控制权才会交还给委托者的函数体
+
+7.5.3 默认构造函数的作用
+！当对象被默认初始化或值初始化时自动执行默认构造函数。默认初始化在以下情况下发生：
+当我们在块作用域内不使用任何初始值定义一个非静态变量或数组时
+当一个类本身含有类类型的成员且使用合成的默认构造函数时
+当类类型的成员没有在构造函数初始值列表中显式地初始化时
+
+！值初始化在以下的情况下发生：
+在数组初始化的过程中如果我们提供的初始值数量少于数组的大小时
+当我们不使用初始值定义一个局部静态变量时
+当我们通过书写形如T()的表达式显式地请求值初始化时，其中T是类型名（vector的一个构造函数只接受一个实参用于说明vector大小，
+它就是使用一个这种形式的实参来对它的元素初始化器进行值初始化)
+
+//缺少默认构造函数
+class NoDefault{
+public:
+	NoDefault(const std::string&);
+	//还有其他成员，但是没有其他构造函数了
+};
+struct A{	//默认情况下my_mem是public的
+	NoDefault my_mem;
+};
+A a;	//错误：不能为A合成构造函数
+struct B{
+	B(){}	//错误：b_member没有初始值
+	NoDefault b_member;
+};
+
+使用默认构造函数
+	Sales_data obj();	//正确：定义了一个函数而非对象
+	if(obj.isbn()==Primer_5th_ed.isbn())	//错误：obj是一个函数
+
+//正确：obj是个默认初始化的对象
+Sales_data obj;
+
+7.5.4 隐式的类类型转换
+如果构造函数只接受一个实参，则它实际上定义了转换为此类类型的隐式转换机制，这种构造函数称作转换构造函数
+
+能通过一个实参调用的构造函数定义了一条从构造函数的参数类型向类类型隐式转换的规则
+
+string null_book="9-999-99999-9";
+//构造一个临时的Sales_data对象
+//该对象的units_sold和revenue等于0，bookNo等于null_book
+item.combine(null_book);
+这里用一个string实参调用了Sales_data的combine成员，该调用是合法的，编译器用给定的string自动创建了一个Sales_data对象。
+新生成的这个（临时）Sales_data对象被传递给combine。因为combine的参数是一个常量引用，所以我们可以给该参数传递一个临时量
+
+只允许一步类类型转换
+//错误：需要用户定义的两种转换
+//(1)把“9-999-99999-9”转换成string
+//(2)再把这个（临时的）string转换成Sales_data
+item.combine("9-999-99999-9")
+
+//正确：显式地转换成string，隐式地转换成Sales_data
+item.combine(string("9-999-99999-9"));
+//正确：隐式地转换成string，显式地转换成Sales_data
+item.combine(Sales_data("9-999-99999-9"));
+
+类类型转换不是总有效
+是否需要从string到Sales_data的转换依赖于我们对用户使用该转换的看法，此例中，这种转换可能是对的，null_book中的string可能表示了
+一个不存在的ISBN编号
+
+另一个从istream到Sales_data的转换
+//使用istream构造函数创建一个函数传递给combine
+item.combine(cin);
+创建的Sales_data对象是个临时量，一旦combine完成我们就不能再访问它了
+
+抑制构造函数定义的隐式转换
+通过将构造函数声明为explicit加以阻止隐式转换的程序
+class Sales_data{
+public:
+	Sales_data()=default;
+	Sales_data(const std::string &s,unsigned n,double p):
+		bookNo(s),units_sold(n),revenue(p*n){}
+	explicit Sales_data(const std::string &s):bookNo(s){}
+	explicit Sales_data(std::istream&);
+	//其他成员与之前的版本一致
+}
+此时没有任何构造函数能用于隐式地创建Sales_data对象
+需要多个实参的构造函数不能用于执行隐式转换。只能在类内声明构造函数时使用explicit关键字，在类外部定义时不应重复
+
+//错误：explicit关键字只允许出现在类内的构造函数声明处
+explicit Sales_data::Sales_data(istream& is)
+{
+	read(is,*this);
+}
+
+explicit构造函数只能用于直接初始化
+Sales_data item1(null_book);	//正确：直接初始化
+//错误：不能将explicit构造函数用于拷贝形式的初始化过程
+Sales_data item2=null_book;
+
+当我们用explicit关键字声明构造函数时，它只能以直接初始化的形式使用，而且编译器不会在自动转换过程中使用该构造函数
+
+为转换显式地使用构造函数
+//正确：实参是一个显式构造的Sales_data对象
+item.combine(Sales_data(null_book));
+//正确：static_cast可以使用explicit的构造函数
+item.combine(static_cast<Sales_data>(cin));
+//使用static_cast执行了显式的而非隐式的转换。其中，static_cast使用istream构造函数创建了一个临时的Sales_data对象
+
+标准库中含有显式构造函数的类
+我们用过的一些标准库中的类含有单参数的构造函数
+接受一个单参数的const char*的string构造函数，不是explicit的
+接受一个容量参数的vector构造函数是explicit的
+
+7.5.5 聚合类
+聚合类使得用户可以直接访问其成员，并且具有特殊的初始化语法形式，当一个类满足如下条件时，我们说它是聚合的：
+所有成员都是public的
+没有定义任何构造函数
+没有类内初始值
+没有基类，也没有virtual函数
+
+struct Data{
+	int ival;
+	string s;
+};
+
+初始化聚合类的数据成员
+//val1.ival=0;val1.s=string("Anna")
+Data val1={0,"Anna"};
+初始值的顺序必须与声明的顺序一致
+
+！显式初始化类的对象的成员存在三个明显的缺点
+要求类的所有成员都是public的
+将正确初始化每个对象的每个成员的重任交给了类的用户
+添加或删除一个成员后，所有的初始化语句都需要更新
+
+7.5.6 字面值常量类
+字面值类型的类可能含有constexpr函数成员，这样的成员必须符合constexpr函数的所有要求，它们是隐式const的
+数据成员都是字面值类型的聚合类是字面值常量类，如果一个类不是聚合类，但它符合下述要求，则它也是一个字面值常量类：
+数据成员都必须是字面值类型
+类必须至少含有一个constexpr构造函数
+如果一个数据成员含有类内初始值，则内置类型成员的初始值必须是一条常量表达式；或者如果成员属于某种类类型，则初始值必须使用
+成员自己的constexpr构造函数
+类必须使用析构函数的默认定义，该成员负责销毁类的对象
+
+constexpr构造函数
+构造函数不能是const的，但字面值常量类的构造函数可以是constexpr函数，字面值常量类必须至少提供一个constexpr构造函数
+constexpr构造函数必须既符合构造函数的要求（不能包含返回语句），又符合constexpr函数的要求（拥有唯一可执行语句是返回语句），
+constexpr构造函数体一般是空的
+class Debug{
+public:
+	constexpr Debug(bool b=true):hw(b),io(b),other(b){}
+	constexpr Debug(bool h,bool i,bool o):hw(h),io(i),other(o){}
+	constexpr bool any(){return hw||io||other;}
+	void set_io(bool b){io=b;}
+	void set_hw(bool b){hw=b;}
+	void set_other(bool b){hw=b;}
+private:
+	bool hw;	//硬件错误，而非io错误
+	bool io;	//IO错误
+	bool other;	//其他错误
+};
+constexpr构造函数必须初始化所有数据成员，初始值或者使用constexpr构造函数，或者是一条常量表达式
+
+constexpr构造函数用于生成constexpr对象以及constexpr函数的参数或返回类型：
+constexpr Debug io_sub(false,true,false);	//调试IO
+if(io_sub.any())				//等价于if(true)
+	cerr<<"print approprivate error messages"<<endl;
+constexpr Debug prod(false);			//无调试
+if(prod.any())					//等价于if(false)
+	ceer<<"print an error message"<<endl;
+
+7.6 类的静态成员
+声明静态成员
+class Account{
+public:
+	void calculate(){amount+=amount*interestRate;}
+	static double rate(){return interestRate;}
+	static void rate(double);
+private:
+	std::string owner;
+	double amount;
+	static double interestRate;
+	static double initRate();
+};
+类的静态成员存在于任何对象之外，对象中不包含任何与静态数据成员有关的数据，因此，每个Account
+对象将包含两个数据成员：owner和amount。只存在一个interestRate对象而且它被所有Account对象共享。
+静态成员函数也不与任何对象绑定在一起，它们不包含this指针，静态函数不能声明成const，不能在static
+函数体内使用this指针
+
+使用类的静态成员
+double r;
+r=Account::rate();	//使用作用域运算符访问静态成员
+
+Account ac1;
+Account *ac2=&ac1;
+//调用静态成员函数rate的等价形式
+r=ac1.rate();
+r=ac2->rate();
+成员函数不用通过作用域运算符就能直接使用静态成员
+class Account{
+public:
+	void calculate(){amount+=amount*interestRate;}
+private:
+	static double interestRate;
+};
+
+定义静态成员
+在类的外部定义静态成员时，不能重复
+static关键字，该关键字只能出现在类内部的声明语句：
+void Account::rate(double newRate)
+{
+	interestRate=newRate;
+}
+和类的所有成员一样，当我们指向类外表与的静态成员时，必须指明成员所属的类名。static关键字则只出现在类内部的声明语句中
+
+不能在类的内部初始化静态成员，必须在类的外部定义和初始化每个静态成员，一个静态数据成员只能定义一次
+
+静态数据成员定义在任何函数之外，因此一旦它被定义，就将一直存在于程序的整个生命周期中
+
+//定义并初始化一个静态成员
+double Account::interestRate=initRate();
+
+!要想确保对象只定义一次，最好的办法是把静态数据成员的定义于其他非内联函数的定义放在同一个文件中
+
+静态成员的类内初始化
+我们可以为静态成员提供const整数类型的类内初始值，要求静态成员必须是字面值常量类型constexpr
+class Account{
+public:
+	static double rate(){return interestRate;}
+	static void rate(double);
+private:
+	static constexpr int period=30;	//period是常量表达式
+	double daily_tb1[period];
+};
+
+//一个不带初始值的静态成员的定义
+constexpr int Account::period;	//初始值在类的定义内提供
+
+！即使一个常量静态数据成员在类内部被初始化了，通常情况下也应该在类的外部定义一下该成员。
+
+静态成员能用于某些场景，而普通成员不能
+class Bar{
+public:
+	//...
+private:
+	static Bar mem1;	//正确：静态成员可以是不完全类型
+	Bar *mem2;		//正确：指针成员可以是不完全类型
+	Bar mem3;		//错误：数据成员必须是完全类型
+};
+静态成员和普通成员的另一个区别是我们可以使用静态成员作为默认实参
+class Screen{
+public:
+	//bkground表示一个在类中稍后定义的静态成员
+	Screen& clear(char=bkground);
+private:
+	static const char bkground;
+};
+非静态数据成员不能作为默认实参，因为它的值本身属于对象的一部分，这么做的结果是无法
+真正提供一个对象以便从中获得成员的值，最终将引发错误
+
+第二部分
+C++标准库
+
+第8章
+IO库
+
+IO库设施
+istream （输入流）类型，提供输入操作
+ostream （输出流）类型，提供输出操作
+cin 一个istream对象，从标准输入读取数据
+cout 一个ostream对象，向标准输出写入数据
+cerr 一个ostream对象，通常用于输出程序错误消息，写入到标准错误
+>>运算符，用来从一个istream对象读取输入数据
+<<运算符，用来向一个ostream对象写入输出数据
+getline函数，从一个给定的istream读取一行数据，存入一个给定的string对象中
+
+8.1 IO类
+头文件：iostream定义了用于读写流的基本类型，fstream定义了读写命名文件的类型，sstream定义了读写内存string对象的类型
+iostream 类型：istream，wistream从流读取数据
+	       ostream，wostream向流写入数据
+	      iostream，wiostream 读写流
+
+fstream  类型：ifstream，wifstream 从文件读取数据
+	       ofstream，wofstream 向文件写入数据
+	       fstream，wfstream   读写文件
+sstream  类型：istringstream,wistringstream从string读取数据
+	       ostringstream,wostringstream向string写入数据
+	       stringstream，wstringstream读写string
+
+IO类型间的关系
+标准库使我们能忽略这些不同类型的流之间的差异，这是通过继承机制实现的。
+ifstream和istringstream都继承自istream
+
+本节剩下部分所介绍的标准库流特性都可以无差别地应用于普通流，文件流和string流，以及char或宽字符流版本
+
+8.1.1 IO对象无拷贝或赋值
+ofstream out1,out2;
+out1=out2;		//错误：不能对流对象赋值
+ofstream print(ofstream);//错误：不能初始化ofstream参数
+out2=print(out2);	//错误：不能拷贝流对象
+
+不能将形参或返回类型设置为流类型，进行IO操作的函数常以引用方式传递和返回流，读写一个IO对象会改变其状态，因此传递和返回的引用不能是const
+
+8.1.2 条件状态
+IO库条件状态
+strm::iostate strm是一种IO类型，iostate是一种机器相关的类型，提供了表达条件状态的完整功能
+strm::badbit 用来指出流已崩溃
+strm::failbit 用来指出一个IO操作失败了
+strm::eofbit 用来指出流到达了文件结束
+strm::goodbit 用来指出流未处于错误状态，此值保证为零
+s.eof() 若流s的eofbit置位，返回true
+s.fail() 若流s的failbit或badbit置位，返回true
+s.bad() 若流s的badbit置位，返回true
+s.good() 若流s处于有效状态，则返回true
+s.clear() 将流s中所有条件状态位复位，将流的状态设置为有效，反馈void
+s.clear(flags) 根据给定flags标志位，将流s中对应条件状态位复位。flags的类型为strm::iostate。返回void
+s.setstate(flags) 根据给定的flags标志位，将流s中对应条件状态位置位。flags的类型为strm::iostate.返回void
+s.rdstate() 返回流s的当前条件状态，返回值类型为strm::iostate
+
+查询流的状态
+IO库定义了4个iostate类型
+badbit 系统级错误，流无法使用
+failbit 发生可恢复错误，被置位
+eofbit，failbit 达到文件结束为止，置位
+goodbit 0表示未发生错误
+badbit，failbit，eofbit任一个被置位，检测流状态的条件会失败
+
+管理条件状态
+流对象的rdstate成员返回一个iostate值，对应流的当前状态
+//记住cin的当前状态
+auto old_state=cin.rdstate();	//记住cin当前状态
+cin.clear();			//使cin有效
+process_input(cin);		//使用cin
+cin.setstate(old_state);	//将cin置为原有状态
+
+//复位failbit和badbit，保持其他标志位不变
+cin.clear(cin.rdstate()&~cin.failbit&~cin.badbit)
+
+8.1.3 管理输出缓冲
+导致缓冲刷新的原因：
+程序真正结束，作为main函数的return操作的一部分，缓冲刷新被执行
+缓冲区满
+操纵符endl显式刷新缓冲区
+在每个输出操作之后，我们可以用操纵符unitbuf设置流的内部状态，来清空缓冲区。默认情况下，对cerr是设置unitbuf，写到cerr内容是立即刷新
+一个输出流可能被关联到另一个流，当读写被关联的流时，关联到的流的缓冲区会被刷新。
+
+刷新输出缓冲区
+cout<<"hi!"<<endl;	//输出hi和一个换行，然后刷新缓冲区
+cout<<"hi!"<<flush;	//输出hi，然后刷新缓冲区，不附加任何额外字符
+cout<<"hi!"<<ends;	//输出hi和一个空字符，然后刷新缓冲区
+
+unitbuf操纵符
+cout<<unitbuf;		//所有输出操作后都会立即刷新缓冲区
+//任何输出都立即刷新，无缓冲
+cout<<nounitbuf;	//回到正常的缓冲方式
+
+警告：如果程序崩溃，输出缓冲区不会被刷新
+
+关联输入和输出流
+当一个输入流被关联到一个输出流时，任何试图从输入流读取数据的操作都会先刷新关联的输出流。标准库将cout和cin关联在一起
+cin>>ival;
+导致cout的缓冲区被刷新
+
+交互式系统通常应该关联输入流。这意味着所有输出，包括用户提示信息，都会在读操作之前被打印出来
+
+tie有两个重载的版本。
+我们可以将一个istream对象关联到另一个ostream，也可以将一个ostream关联到另一个ostream
+cin.tie(&cout); 	//标准库将cin和cout关联在一起
+//old_tie指向当前关联到cin的流（如果有的话）
+ostream *old_tie=cin.tie(nullptr);	//cin不再与其他流关联
+//将cin与cerr关联；这不是一个好主意，因为cin应该关联到cout
+cin.tie(&cerr);		//读取cin会刷新cerr而不是cout
+cin.tie(old_tie);	//重建cin和cout间的正常关联
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
